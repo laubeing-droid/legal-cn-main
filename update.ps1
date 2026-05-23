@@ -51,7 +51,6 @@ foreach ($name in $domains) {
     # 上游内容
     if (Test-Path "$src\CLAUDE.md") { Copy-Item "$src\CLAUDE.md" "$tgt\CLAUDE.md" -Force }
     if (Test-Path "$src\README.md") { Copy-Item "$src\README.md" "$tgt\README.md" -Force }
-    if (Test-Path "$src\.mcp.json") { Copy-Item "$src\.mcp.json" "$tgt\.mcp.json" -Force -ErrorAction SilentlyContinue }
     if (Test-Path "$src\references") {
         $null = New-Item -ItemType Directory -Force "$tgt\references"
         Get-ChildItem "$src\references\*" -File -ErrorAction SilentlyContinue | ForEach-Object {

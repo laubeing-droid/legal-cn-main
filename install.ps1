@@ -51,7 +51,6 @@ foreach ($name in $domains) {
     $upstreamModule = "$UpstreamDir\$name"
     if (Test-Path "$upstreamModule\CLAUDE.md") { Copy-Item "$upstreamModule\CLAUDE.md" "$tgtDir\CLAUDE.md" -Force }
     if (Test-Path "$upstreamModule\README.md") { Copy-Item "$upstreamModule\README.md" "$tgtDir\README.md" -Force }
-    if (Test-Path "$upstreamModule\.mcp.json") { Copy-Item "$upstreamModule\.mcp.json" "$tgtDir\.mcp.json" -Force }
     if (Test-Path "$upstreamModule\references") {
         $null = New-Item -ItemType Directory -Force "$tgtDir\references"
         Get-ChildItem "$upstreamModule\references\*" -File -ErrorAction SilentlyContinue | ForEach-Object {
