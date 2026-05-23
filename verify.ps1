@@ -5,6 +5,8 @@
   检查每个技能目录的关键文件是否存在，列出缺失项。
 #>
 
+#Requires -Version 5.1
+
 $SkillsDir = "$env:USERPROFILE\.codex\skills"
 $VendorDir = "$env:USERPROFILE\.codex\vendor"
 $UpstreamDir = "$VendorDir\claude-for-legal-CN"

@@ -9,6 +9,8 @@
   5. 验证安装完整性
 #>
 
+#Requires -Version 5.1
+
 $ErrorActionPreference = 'Stop'
 $RepoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $SkillsDir = "$env:USERPROFILE\.codex\skills"

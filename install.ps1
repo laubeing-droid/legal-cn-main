@@ -8,6 +8,8 @@
   4. 设置内容链接便于自动更新
 #>
 
+#Requires -Version 5.1
+
 $ErrorActionPreference = 'Stop'
 $RepoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $SkillsDir = "$env:USERPROFILE\.codex\skills"

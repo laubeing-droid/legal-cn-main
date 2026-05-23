@@ -6,6 +6,8 @@
   本仓库的克隆文件不受影响。
 #>
 
+#Requires -Version 5.1
+
 $SkillsDir = "$env:USERPROFILE\.codex\skills"
 $VendorDir = "$env:USERPROFILE\.codex\vendor"
 

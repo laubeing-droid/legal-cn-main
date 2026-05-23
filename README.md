@@ -14,6 +14,11 @@
 
 ## 一键安装
 
+> **Windows 用户**：如果遇到执行策略限制，先运行：
+> ```powershell
+> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+> ```
+
 ```powershell
 git clone https://github.com/laubeing-droid/Claude-for-Legal-CN-to-Codex.git
 cd Claude-for-Legal-CN-to-Codex
@@ -49,6 +54,8 @@ cd Claude-for-Legal-CN-to-Codex
 | **北大法宝 CLI 命令行** | CLI 工具 | — | 调试/验证 |
 
 > 编辑 `~/.codex/config.toml` → 替换凭证 → 重启 Codex。
+>
+> **安全提醒**：API 密钥通过 `config.toml` 或环境变量注入，**不要将凭证提交到 Git**。本仓库不包含任何密钥文件。
 
 ---
 
