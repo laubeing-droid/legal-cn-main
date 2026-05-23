@@ -20,27 +20,63 @@ description: >
 
 ## 自动路由规则
 
-| 关键词 | 路由目标 |
+当用户以 \@codex-claude-legal-cn\ 触发或输入法律任务关键词时，按以下规则选择技能文件：
+
+### 匹配后执行
+1. 匹配关键词 -> 确定目标技能路径
+2. 读取目标 SKILL.md（如为 claude-for-legal 域技能，还需读取同目录 CLAUDE.md 和 references/）
+3. 按照目标技能的工作原则和输出格式执行任务
+
+### claude-for-legal 路由表
+| 关键词 | 加载路径 |
 |---|---|
-| 诉讼、仲裁、执行、保全、证据、代理词 | litigation-legal |
-| 合同审查、违约、补充协议、函件 | commercial-legal |
-| 公司、股权、投资、尽调、并购 | corporate-legal |
-| 劳动、社保、解除、竞业、规章制度 | employment-legal |
-| 隐私、个保法、数据、出境 | privacy-legal |
-| 产品上线、营销合规、广告法 | product-legal |
-| 监管、合规跟踪、政策变化 | regulatory-legal |
-| AI治理、算法、伦理审查 | ai-governance-legal |
-| 商标、专利、著作权、侵权 | ip-legal |
-| 法考、案例学习、法律学习 | law-student |
-| 法律诊所、法律援助 | legal-clinic |
-| 技能安装、技能管理 | legal-builder-hub |
-| 排期、开庭、庭前、时效、案卷 | solo-law-firm (案件管理部) |
-| 接案、咨询、案情、客户沟通、回访 | solo-law-firm (客户关系部) |
-| 企业背调、股权穿透、诉讼风险、资产线索 | solo-law-firm (尽职调查部) |
-| 利冲、收费、报价、催收、利润、账单 | solo-law-firm (财务行政+风控) |
-| SEO、公众号、短视频、小红书、抖音、普法 | solo-law-firm (市场拓展部) |
-| 法官偏好、类案模板、法规监控、知识沉淀 | solo-law-firm (知识管理部) |
-| 执业经营、律所管理、个人律所 | solo-law-firm (全部门) |
+| 诉讼、仲裁、执行、保全、证据、代理词 | \~/.codex/skills/litigation-legal/\ |
+| 合同审查、违约、补充协议、函件 | \~/.codex/skills/commercial-legal/\ |
+| 公司、股权、投资、尽调、并购 | \~/.codex/skills/corporate-legal/\ |
+| 劳动、社保、解除、竞业、规章制度 | \~/.codex/skills/employment-legal/\ |
+| 隐私、个保法、数据、出境 | \~/.codex/skills/privacy-legal/\ |
+| 产品上线、营销合规、广告法 | \~/.codex/skills/product-legal/\ |
+| 监管、合规跟踪、政策变化 | \~/.codex/skills/regulatory-legal/\ |
+| AI治理、算法、伦理审查 | \~/.codex/skills/ai-governance-legal/\ |
+| 商标、专利、著作权、侵权 | \~/.codex/skills/ip-legal/\ |
+| 法考、案例学习、法律学习 | \~/.codex/skills/law-student/\ |
+| 法律诊所、法律援助 | \~/.codex/skills/legal-clinic/\ |
+| 技能安装、技能管理 | \~/.codex/skills/legal-builder-hub/\ |
+
+### solo-law-firm 路由表（自包含技能，无需 CLAUDE.md）
+| 关键词 | 部门 | 加载路径（示例） |
+|---|---|---|
+| 合同审查 | 01-case-practice | \~/.codex/skills/solo-law-firm/01-case-practice/contract-reviewer/SKILL.md\ |
+| 法律检索、法条、请求权 | 01-case-practice | \~/.codex/skills/solo-law-firm/01-case-practice/legal-research-expert/SKILL.md\ |
+| 诉讼策略、攻防、起诉 | 01-case-practice | \~/.codex/skills/solo-law-firm/01-case-practice/litigation-strategist/SKILL.md\ |
+| 文书、起诉状、答辩状 | 01-case-practice | \~/.codex/skills/solo-law-firm/01-case-practice/legal-document-drafter/SKILL.md\ |
+| 证据、质证、证据链 | 01-case-practice | \~/.codex/skills/solo-law-firm/01-case-practice/evidence-analyst/SKILL.md\ |
+| 排期、开庭、庭前 | 02-case-management | \~/.codex/skills/solo-law-firm/02-case-management/trial-preparation-checker/SKILL.md\ |
+| 时效、诉讼时效 | 02-case-management | \~/.codex/skills/solo-law-firm/02-case-management/deadline-monitor/SKILL.md\ |
+| 案件排期、日程 | 02-case-management | \~/.codex/skills/solo-law-firm/02-case-management/case-scheduler/SKILL.md\ |
+| 初次咨询、接案、案情 | 03-client-relations | \~/.codex/skills/solo-law-firm/03-client-relations/initial-consultation/SKILL.md\ |
+| 客户沟通、进展通报、风险告知 | 03-client-relations | \~/.codex/skills/solo-law-firm/03-client-relations/client-communication-drafter/SKILL.md\ |
+| 回访、满意度、二次转化 | 03-client-relations | \~/.codex/skills/solo-law-firm/03-client-relations/satisfaction-surveyor/SKILL.md\ |
+| 企业背调、工商、信用 | 04-due-diligence | \~/.codex/skills/solo-law-firm/04-due-diligence/corporate-background-investigator/SKILL.md\ |
+| 股权穿透、股权结构 | 04-due-diligence | \~/.codex/skills/solo-law-firm/04-due-diligence/equity-penetration-analyst/SKILL.md\ |
+| 诉讼风险、涉诉、被告记录 | 04-due-diligence | \~/.codex/skills/solo-law-firm/04-due-diligence/litigation-risk-scanner/SKILL.md\ |
+| 资产线索、财产保全、可执行 | 04-due-diligence | \~/.codex/skills/solo-law-firm/04-due-diligence/asset-trace-investigator/SKILL.md\ |
+| SEO、搜索优化、关键词 | 05-business-development | \~/.codex/skills/solo-law-firm/05-business-development/seo-optimizer/SKILL.md\ |
+| 公众号、法律科普长文 | 05-business-development | \~/.codex/skills/solo-law-firm/05-business-development/wechat-article-creator/SKILL.md\ |
+| 小红书、知乎、图文科普 | 05-business-development | \~/.codex/skills/solo-law-firm/05-business-development/social-media-legal-popularizer/SKILL.md\ |
+| 短视频、抖音、口播 | 05-business-development | \~/.codex/skills/solo-law-firm/05-business-development/short-video-planner/SKILL.md\ |
+| 收费、报价、律师费 | 06-finance-admin | \~/.codex/skills/solo-law-firm/06-finance-admin/fee-strategy-consultant/SKILL.md\ |
+| 利润、ROI、时薪、赚钱 | 06-finance-admin | \~/.codex/skills/solo-law-firm/06-finance-admin/profit-accountant/SKILL.md\ |
+| 催收、账单、发票、欠款 | 06-finance-admin | \~/.codex/skills/solo-law-firm/06-finance-admin/invoice-collection-specialist/SKILL.md\ |
+| 模板、脱敏、文书模板化 | 07-knowledge-management | \~/.codex/skills/solo-law-firm/07-knowledge-management/case-template-refiner/SKILL.md\ |
+| 法官偏好、法官画像、裁判风格 | 07-knowledge-management | \~/.codex/skills/solo-law-firm/07-knowledge-management/judge-preference-analyst/SKILL.md\ |
+| 法规动态、法规监控、新法 | 07-knowledge-management | \~/.codex/skills/solo-law-firm/07-knowledge-management/regulatory-change-monitor/SKILL.md\ |
+| 利冲、利益冲突 | 08-risk-compliance | \~/.codex/skills/solo-law-firm/08-risk-compliance/conflict-checker/SKILL.md\ |
+
+### 路由优先级
+1. 精确匹配：关键词直接命中特定技能 -> 加载该技能
+2. 模糊匹配：关键词命中多个技能 -> 加载最相关的前 2 个，让用户确认
+3. 无匹配：默认加载根技能上下文，询问用户需求
 
 ## MCP 连接器
 
