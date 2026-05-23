@@ -1,0 +1,18 @@
+﻿# Auto-detect text files, normalize to LF
+* text=auto
+
+# PowerShell scripts
+*.ps1 text eol=lf
+
+# Markdown
+*.md text eol=lf
+
+# YAML
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.zip binary

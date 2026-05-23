@@ -3,7 +3,6 @@
 ## 一、安装
 
 ### 前置条件
-
 - 已安装 Codex Desktop
 - 操作系统：Windows 10/11
 - 已安装 Git（[下载](https://git-scm.com/downloads)）
@@ -22,16 +21,23 @@ cd codex-legal-cn-skills
 
 安装脚本会自动完成：
 
-1. 克隆上游法律内容仓库（SH88-source/claude-for-legal-CN）
-2. 创建 12 个领域技能的入口文件（SKILL.md）
-3. 设置目录联接，便于自动更新
-4. 复制每个领域的完整工作流指令（CLAUDE.md）和法律参考文件
+1. 克隆上游法律内容仓库（SH88-source/claude-for-legal-CN）到 `~/.codex/vendor/claude-for-legal-CN/`
+2. 创建 13 个技能目录和入口文件（SKILL.md）
+3. 复制每个领域的完整工作流指令（CLAUDE.md）和法律参考文件
+4. 配置 PowerShell 执行策略
+5. 验证所有技能是否安装成功
 
 安装完成后重启 Codex Desktop 即可使用。
 
 ### 验证安装
 
-检查技能目录是否存在：
+```powershell
+.\verify.ps1
+```
+
+检查每个技能目录的关键文件是否存在。输出应显示全部 13 个技能均为 `[OK]`。
+
+或手动检查：
 
 ```powershell
 Get-ChildItem "$env:USERPROFILE\.codex\skills\"
@@ -89,7 +95,7 @@ legal-builder-hub      技能治理中心
 
 每次在 Codex 中使用法律技能时，根技能会自动执行以下操作：
 
-1. 查找上游仓库（优先同级目录，其次 vendor 链接）
+1. 查找上游缓存 `~/.codex/vendor/claude-for-legal-CN/`
 2. `git pull` 拉取 SH88-source/claude-for-legal-CN 最新内容
 3. 同步 CLAUDE.md + references + 子技能到 `~/.codex/skills/`
 4. 本次对话直接使用最新内容，无需重启
@@ -125,21 +131,21 @@ cd codex-legal-cn-skills
 
 ## 五、架构说明
 
-本仓库不直接包含上游法律内容。安装时自动从上游拉取。
+本仓库不直接包含上游法律内容。安装时自动缓存到 `~/.codex/vendor/`。
 
 ```
 codex-legal-cn-skills           <- 包装层（本仓库）
   skills/SKILL.md               入口定义 + 路由规则
-  install.ps1                   一键安装
-  update.ps1                    手动更新
+  install.ps1 / update.ps1      安装与更新
   docs/                         文档
-       │
+       |
        ▼
-SH88-source/claude-for-legal-CN <- 内容层（上游）
-  CLAUDE.md                     工作流指令
-  references/                   法律参考
-  skills/                       子技能
-       │
+~/.codex/vendor/                <- 内容层（上游缓存）
+  claude-for-legal-CN/
+    CLAUDE.md                   工作流指令
+    references/                 法律参考
+    skills/                     子技能
+       |
        ▼
 ~/.codex/skills/<domain>/       <- 运行层
   SKILL.md                      本仓库提供
@@ -147,7 +153,19 @@ SH88-source/claude-for-legal-CN <- 内容层（上游）
   references/                   上游同步
 ```
 
-## 六、输出说明与注意事项
+## 六、卸载
+
+如需完全移除已安装的技能：
+
+```powershell
+cd codex-legal-cn-skills
+.\uninstall.ps1
+```
+
+脚本会删除 `~/.codex/skills/` 下所有法律技能目录和 `~/.codex/vendor/` 上游缓存。
+本仓库的克隆文件不受影响，可随时重新安装。
+
+## 七、输出说明与注意事项
 
 ### 输出定位
 - 所有输出均为**律师审查草稿**
@@ -163,7 +181,7 @@ SH88-source/claude-for-legal-CN <- 内容层（上游）
 - 默认假设适用中国法律（中国大陆）
 - 如涉及其他法域，需在问题中明示
 
-## 七、进阶配置
+## 八、进阶配置
 
 ### 配置 MCP 连接器
 
@@ -175,4 +193,5 @@ SH88-source/claude-for-legal-CN <- 内容层（上游）
 
 ### 上游监测
 
-本仓库配置了 GitHub Actions，每周自动检查上游仓库是否有更新。有变化时自动创建 Issue 通知。
+本仓库配置了 GitHub Actions，每周自动检查上游仓库是否有更新。
+仅在有实际新提交时创建 Issue 通知。

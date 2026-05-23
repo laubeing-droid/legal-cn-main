@@ -7,6 +7,7 @@ on:
 
 permissions:
   issues: write
+  contents: write
 
 jobs:
   check-upstreams:
@@ -14,30 +15,49 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check upstream chain
+      - name: Fetch upstream commits and compare
+        id: fetch
         run: |
-          echo "## Upstream Update Report" > report.md
-          echo "" >> report.md
-          echo "Checked: $(date -u '+%Y-%m-%d %H:%M UTC')" >> report.md
-          echo "" >> report.md
+          CACHE_FILE=".upstream-last-check"
+          REPORT="## 上游更新报告%0A%0A"
+          REPORT+="检查时间: $(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A"
+          CHANGED=false
+
           check_repo() {
-            echo "### $1" >> report.md
-            echo "- Repo: $2" >> report.md
-            curl -s "https://api.github.com/repos/$2/commits?per_page=3" | jq -r '.[] | "- " + .commit.message[0..80] + " (" + .sha[0..7] + ")"' >> report.md 2>/dev/null || echo "- Unable to fetch" >> report.md
-            echo "" >> report.md
+            LABEL="$1"
+            REPO="$2"
+            REPORT+="### $LABEL%0A"
+            REPORT+="- 仓库: $REPO%0A"
+            COMMITS=$(curl -s "https://api.github.com/repos/$REPO/commits?per_page=3")
+            LATEST=$(echo "$COMMITS" | jq -r '.[0].sha // "unknown"')
+            REPORT+=$(echo "$COMMITS" | jq -r '.[] | "- " + (.commit.message[0:80] | gsub("\\n"; " ")) + " (" + .sha[0:7] + ")"' 2>/dev/null | sed 's/$/%0A/')
+            REPORT+="%0A%0A"
+
+            if [ -f "$CACHE_FILE" ]; then
+              OLD=$(grep "^$REPO=" "$CACHE_FILE" 2>/dev/null | cut -d= -f2 || echo "")
+              if [ "$OLD" != "$LATEST" ] && [ "$LATEST" != "unknown" ] && [ -n "$LATEST" ]; then
+                CHANGED=true
+              fi
+            else
+              CHANGED=true
+            fi
+            echo "$LATEST" > /tmp/sha_$(echo "$REPO" | tr '/' '_')
           }
-          check_repo "Anthropic Original" "anthropics/claude-for-legal"
-          check_repo "Chinese Fork" "zhou210712/claude-for-legal-ZH"
-          check_repo "Our Upstream" "SH88-source/claude-for-legal-CN"
-          check_repo "Codex Wrapper" "gjhcsjamin/codex-for-legal-CN"
-          cat report.md
+
+          check_repo "Anthropic 原版" "anthropics/claude-for-legal"
+          check_repo "中文汉化版" "zhou210712/claude-for-legal-ZH"
+          check_repo "当前直接上游" "SH88-source/claude-for-legal-CN"
+          check_repo "Codex 封装版" "gjhcsjamin/codex-for-legal-CN"
+
+          echo "report=$REPORT" >> $GITHUB_OUTPUT
+          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
 
       - name: Create or update issue
+        if: steps.fetch.outputs.changed == 'true'
         uses: actions/github-script@v7
         with:
           script: |
-            const fs = require('fs');
-            const report = fs.readFileSync('report.md', 'utf8');
+            const report = decodeURIComponent('${{ steps.fetch.outputs.report }}');
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -55,8 +75,24 @@ jobs:
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                title: 'Upstream Update - ' + new Date().toISOString().slice(0, 10),
+                title: '上游更新通知 - ' + new Date().toISOString().slice(0, 10),
                 body: report,
                 labels: ['upstream-update']
               });
             }
+
+      - name: Cache last commit SHAs
+        run: |
+          CACHE_FILE=".upstream-last-check"
+          > "$CACHE_FILE"
+          for repo in anthropics/claude-for-legal zhou210712/claude-for-legal-ZH SH88-source/claude-for-legal-CN gjhcsjamin/codex-for-legal-CN; do
+            sha=$(curl -s "https://api.github.com/repos/$repo/commits?per_page=1" | jq -r '.[0].sha // ""')
+            if [ -n "$sha" ]; then
+              echo "$repo=$sha" >> "$CACHE_FILE"
+            fi
+          done
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add "$CACHE_FILE"
+          git diff --cached --quiet || git commit -m "chore: update upstream cache"
+          git push

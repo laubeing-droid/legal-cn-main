@@ -8,11 +8,24 @@ Desktop.ini
 *.swo
 *~
 *.bak
+.idea/
+.vscode/
 
-# Logs
+# Code
+__pycache__/
+*.pyc
+*.pyo
+node_modules/
+*.class
+
+# Logs & Temp
 *.log
 upstream-logs/
-
-# Temp
-/
 temp/
+tmp/
+
+# Vendor (cloned during install, not tracked)
+vendor/
+
+# Git
+*.orig

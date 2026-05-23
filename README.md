@@ -31,10 +31,15 @@ cd codex-legal-cn-skills
 
 ## 仓库内容
 
-- 12 个领域技能 —— 每个领域围绕冷启动访谈构建，学习你的工作方式
-- 根技能自动路由 —— codex-for-legal-cn 根据关键词自动分发到对应领域
-- 自动更新机制 —— 每次使用法律功能时自动同步上游最新内容
-- 上游监测 —— GitHub Actions 每周自动检查上游仓库的更新
+| 文件 | 说明 |
+|------|------|
+| install.ps1 | 一键安装：克隆上游、部署技能、配置环境 |
+| update.ps1 | 手动同步上游最新内容到本地 |
+| uninstall.ps1 | 一键卸载所有已安装技能 |
+| verify.ps1 | 检查安装是否完整 |
+| skills/ | 13 个技能入口定义（SKILL.md） |
+| docs/ | 完整中文文档 |
+| .github/workflows/ | 上游监测 GitHub Actions |
 
 ---
 
@@ -85,9 +90,9 @@ cd codex-legal-cn-skills
 ## 自动更新机制
 
 每次在 Codex 中触发法律任务时，根技能自动执行：
-1. 查找上游仓库（优先本仓库同级目录，其次 vendor 链接）
+1. 查找上游缓存 `~/.codex/vendor/claude-for-legal-CN/`
 2. git pull 拉取 SH88-source/claude-for-legal-CN 最新内容
-3. 同步 CLAUDE.md + references + 子技能到 ~/.codex/skills/
+3. 同步 CLAUDE.md + references + 子技能到 `~/.codex/skills/`
 4. 本次对话直接生效，无需重启
 
 手动更新：
@@ -101,28 +106,25 @@ cd codex-legal-cn-skills
 ## 架构
 
 ```
-codex-legal-cn-skills               <- 包装层（本仓库）
-  skills/SKILL.md                   入口定义 + 路由规则
-  install.ps1                       一键安装
-  update.ps1                        手动更新
-  docs/                             文档
+codex-legal-cn-skills                <- 包装层（本仓库）
+  skills/SKILL.md                    入口定义 + 路由规则
+  install.ps1 / update.ps1           安装与更新
+  docs/                              文档
        |
        | 依赖上游
        v
-SH88-source/claude-for-legal-CN     <- 内容层
-  CLAUDE.md                         完整工作流指令
-  references/                       中国法核心规则
-  skills/                           子技能
-  agents/                           托管 Agent
-  .mcp.json                         MCP 连接配置
+~/.codex/vendor/claude-for-legal-CN/ <- 内容层（自动缓存）
+  CLAUDE.md                           完整工作流指令
+  references/                         中国法核心规则
+  skills/                             子技能
        |
        | 安装到
        v
-~/.codex/skills/<domain>/            <- 运行层
-  SKILL.md                          本仓库提供（入口）
-  CLAUDE.md                         上游同步（主指令）
-  references/                       上游同步（法条参考）
-  skills/                           上游同步（子技能）
+~/.codex/skills/<domain>/             <- 运行层
+  SKILL.md                            本仓库提供（入口）
+  CLAUDE.md                           上游同步（主指令）
+  references/                         上游同步（法条参考）
+  skills/                             上游同步（子技能）
 ```
 
 ### 设计原则
@@ -136,19 +138,19 @@ SH88-source/claude-for-legal-CN     <- 内容层
 ## 上游依赖链
 
 ```
-anthropics/claude-for-legal          <- 美国法原版（Anthropic 官方）
+anthropics/claude-for-legal            <- 美国法原版（Anthropic 官方）
   | fork + 全面汉化
   v
-zhou210712/claude-for-legal-ZH       <- 中文汉化版
+zhou210712/claude-for-legal-ZH         <- 中文汉化版
   | 持续维护
   v
-SH88-source/claude-for-legal-CN      <- 当前直接上游
+SH88-source/claude-for-legal-CN        <- 当前直接上游
   | 本仓库整合包装
   v
-codex-legal-cn-skills                <- 你在这里
+codex-legal-cn-skills                  <- 你在这里
   | 安装到 Codex
   v
-~/.codex/skills/                     <- 运行层
+~/.codex/skills/                       <- 运行层
 ```
 
 各项目角色：
@@ -166,7 +168,7 @@ codex-legal-cn-skills                <- 你在这里
 GitHub Actions 每周一自动检查整条上游链的更新。
 监测对象：anthropics/claude-for-legal, zhou210712/claude-for-legal-ZH,
 SH88-source/claude-for-legal-CN, gjhcsjamin/codex-for-legal-CN，
-有变化时自动在当前仓库创建 Issue 通知。
+**仅在检测到实际变化时创建 Issue**。
 
 ---
 
@@ -174,14 +176,6 @@ SH88-source/claude-for-legal-CN, gjhcsjamin/codex-for-legal-CN，
 
 预配置 yuandian（元典）MCP 连接器用于案例检索和法规检索。
 详情见 docs/connectors.md。
-
----
-
-## 常见问题
-
-- **Command not found？** 重启 Codex Desktop
-- **引用标注[需验证]？** 连接法律检索工具
-- **输出不准确？** 所有输出均为草稿，引用须核验现行有效性
 
 ---
 

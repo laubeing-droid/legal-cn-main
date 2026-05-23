@@ -12,8 +12,8 @@ description: >
 每次执行法律任务前，检查本地上游仓库是否有更新并同步。
 
 查找顺序：
-1. 本仓库同级目录 ../claude-for-legal-CN/
-2. ~/.codex/vendor/claude-for-legal-ZH/（install.ps1 创建的联接）
+1. ~/.codex/vendor/claude-for-legal-CN/（install.ps1 创建的缓存）
+2. ../claude-for-legal-CN/（本仓库同级目录）
 
 找到后执行 git pull，同步 CLAUDE.md 和 references 到 ~/.codex/skills/。
 静默执行，不影响对话。

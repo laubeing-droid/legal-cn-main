@@ -1,6 +1,6 @@
 ﻿---
 name: legal-clinic
-description: 法律援助接谈、客户函件、法律备忘录、检索路线图
+description: 法律援助接谈、客户信函、法律备忘录、检索路线图
 ---
 
 # 法律诊所 法务技能
