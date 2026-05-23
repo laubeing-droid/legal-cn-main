@@ -18,11 +18,19 @@ cd codex-legal-cn-skills
 
 ## 配置 MCP（可选但推荐）
 
-法律技能连接检索工具后效果最佳。安装脚本已在 ~/.codex/config.toml 写入配置，你只需替换凭证：
+安装脚本已在 ~/.codex/config.toml 写入配置，你只需替换凭证：
 
-**chineselaw（推荐）**（基于 [chineselaw-mcp](https://www.npmjs.com/package/chineselaw-mcp)）：注册 https://open.chineselaw.com → 获取 API Key → 编辑 config.toml → 替换 CHINESELAW_API_KEY
+**chineselaw（推荐）**：基于 [chineselaw-mcp](https://www.npmjs.com/package/chineselaw-mcp)。
+注册 https://open.chineselaw.com → 获取 API Key → 编辑 config.toml → 替换 CHINESELAW_API_KEY。
 
-**北大法宝（备选）**：注册 https://mcp.pkulaw.com → 获取 Access Token → 编辑 config.toml → 替换所有 YOUR_ACCESS_TOKEN
+**北大法宝 MCP 协议**：注册 https://mcp.pkulaw.com → 获取 Access Token → 编辑 config.toml → 替换所有 YOUR_ACCESS_TOKEN。
+
+**北大法宝 CLI 命令行**（可选调试工具）：基于 [@pkulaw/mcp-cli](https://www.npmjs.com/package/@pkulaw/mcp-cli)。
+`ash
+npm install -g @pkulaw/mcp-cli
+pkulaw-mcp init --authorization "Bearer YOUR_ACCESS_TOKEN"
+pkulaw-mcp update
+`
 
 ## 开始使用
 
@@ -40,7 +48,7 @@ cd codex-legal-cn-skills
 
 - **技能没生效？** 重启 Codex Desktop
 - **引用标注[需验证]？** 配置 MCP 连接器（见 docs/connectors.md）
-- **如何手动更新？** 运行 .\update.ps1
+- **如何更新？** 运行 .\update.ps1
 - **如何卸载？** 运行 .\uninstall.ps1
 
 详细说明见 docs/usage-guide.md。

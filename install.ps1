@@ -177,7 +177,12 @@ Write-Host '  1. 注册 https://open.chineselaw.com → 获取 API Key' -Foregro
 Write-Host '  2. 在 config.toml 中找到 [mcp_servers.chineselaw.env]' -ForegroundColor Cyan
 Write-Host '  3. 将 CHINESELAW_API_KEY 的值替换为真实 Key' -ForegroundColor Cyan
 Write-Host ''
-Write-Host '北大法宝（备选，10 个服务）：' -ForegroundColor Cyan
+Write-Host '北大法宝（备选，10 个服务）：
+北大法宝 CLI 命令行（调试工具）：
+  基于 @pkulaw/mcp-cli（北大法宝官方），可选安装用于调试和脚本自动化
+  npm install -g @pkulaw/mcp-cli
+  pkulaw-mcp init --authorization "Bearer YOUR_ACCESS_TOKEN"
+' -ForegroundColor Cyan
 Write-Host '  1. 注册 https://mcp.pkulaw.com → 获取 Access Token' -ForegroundColor Cyan
 Write-Host '  2. 将所有 "YOUR_ACCESS_TOKEN" 替换为真实 Token' -ForegroundColor Cyan
 Write-Host '  3. 如有 NL SQL 服务，替换 YOUR_NL_SQL_SERVICE_ID' -ForegroundColor Cyan

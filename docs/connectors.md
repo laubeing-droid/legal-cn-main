@@ -1,15 +1,18 @@
 ﻿# MCP 连接器配置指南
 
-法律技能连接了权威法律数据源后效果最佳。本仓库支持两个中国法律 MCP 连接器，**推荐 chineselaw**。
+法律技能连接了权威法律数据源后效果最佳。本仓库支持以下连接方式：
 
-> ⚠️ **重要**：Codex Desktop 的 MCP 配置位于 ~/.codex/config.toml 的 [mcp_servers] 段，
-> 不是技能目录下的 .mcp.json 文件。运行 install.ps1 后会自动写入 config.toml，
-> 你只需替换凭证即可。运行 .\update.ps1 可检查各 MCP 配置状态。
+| 连接器 | 方式 | 工具数 | 推荐 |
+|--------|------|--------|------|
+| **chineselaw（元典智库）** | MCP 协议 stdio | 33 | ⭐ 首选 |
+| **北大法宝 MCP 协议** | MCP 协议 HTTP | 10 服务 | ⭐ 推荐 |
+| **北大法宝 CLI 命令行** | CLI 工具 | 调试/验证用 | 配合使用 |
 
 ---
 
-## 一、chineselaw（元典智库）— 推荐
+## 一、chineselaw（元典智库）— 首选
 
+基于 [chineselaw-mcp](https://www.npmjs.com/package/chineselaw-mcp)（作者 zooges），
 将元典智库 API 开放平台封装为 MCP 工具，覆盖三大类共 **33 个工具**。
 
 ### 前置条件
@@ -27,13 +30,13 @@
 
 安装后编辑 config.toml：
 
-`powershell
-notepad "C:\Users\being\.codex\config.toml"
-`
+```powershell
+notepad "$env:USERPROFILE\.codex\config.toml"
+```
 
-找到以下内容，将 YOUR_API_KEY 替换为真实 Key：
+找到以下内容，将 `YOUR_API_KEY` 替换为真实 Key：
 
-`	oml
+```toml
 [mcp_servers.chineselaw]
 command = "npx"
 args = ["-y", "chineselaw-mcp"]
@@ -43,7 +46,7 @@ enabled = true
 
 [mcp_servers.chineselaw.env]
 CHINESELAW_API_KEY = "YOUR_API_KEY"    # ← 替换为真实 API Key
-`
+```
 
 ### 可用工具（33 个）
 
@@ -95,19 +98,12 @@ CHINESELAW_API_KEY = "YOUR_API_KEY"    # ← 替换为真实 API Key
 | get_enterprise_tax_arrears | 欠税公告 |
 | get_enterprise_serious_illegal | 严重违法 |
 
-### 使用示例
-
-`
-搜索关于合同法的现行有效法规
-查一下北京海淀区2023年的买卖合同纠纷案例
-查询华为技术有限公司的工商信息和涉诉情况
-`
-
 ---
 
-## 二、北大法宝 — 备选方案
+## 二、北大法宝 MCP 协议 — 推荐
 
-北大法宝提供 10 个独立的 MCP 服务。安装脚本已自动写入配置，你只需替换 Token。
+北大法宝提供 10 个独立的 HTTP MCP 服务。安装脚本已在 `~/.codex/config.toml` 写入全部配置，
+你只需替换 Token 即可在 Codex 中直接使用。
 
 ### 注册获取凭证
 
@@ -117,22 +113,26 @@ CHINESELAW_API_KEY = "YOUR_API_KEY"    # ← 替换为真实 API Key
 4. 在已购买的服务中复制各服务 URL
 5. 在「密钥管理」生成 Access Token
 
-> 可在 https://mcp.pkulaw.com/console/playground 实时测试 MCP 服务连接。
+### 配置到 Codex
 
-### 配置
+打开 config.toml：
 
-打开 config.toml，找到所有以 [mcp_servers.pkulaw- 开头的段：
+```powershell
+notepad "$env:USERPROFILE\.codex\config.toml"
+```
 
-`	oml
+找到所有以 `[mcp_servers.pkulaw-` 开头的段，将 `YOUR_ACCESS_TOKEN` 替换为真实 Token：
+
+```toml
 [mcp_servers.pkulaw-law-search]
 url = "https://apim-gateway.pkulaw.com/mcp-law-search-service"
-http_headers = { Authorization = "Bearer YOUR_ACCESS_TOKEN" }   # ← 替换为真实 Token
+http_headers = { Authorization = "Bearer YOUR_ACCESS_TOKEN" }   # ← 替换
 startup_timeout_sec = 30
 tool_timeout_sec = 600
 enabled = true
-`
+```
 
-将每个服务中的 "YOUR_ACCESS_TOKEN" 替换为你的真实 Token。如购买了 NL SQL 服务，还需替换 YOUR_NL_SQL_SERVICE_ID。
+如购买了 NL SQL 服务，还需替换 `YOUR_NL_SQL_SERVICE_ID`。
 
 ### 已配置的 10 个服务
 
@@ -151,52 +151,105 @@ enabled = true
 
 ---
 
-## 三、验证连接
+## 三、北大法宝 CLI 命令行 — 调试与验证工具
+
+基于 [@pkulaw/mcp-cli](https://www.npmjs.com/package/@pkulaw/mcp-cli)（北大法宝官方，MIT 协议），
+在终端中提供法律检索、案号识别、法条校验等能力。**不经 Codex，直接通过命令行调用**。
+
+> **用途**：调试 Token 是否有效、查看已订阅的服务、快速验证 API 返回结果。
+> 不替代 MCP 协议配置，而是配合使用。
+
+### 安装
+
+```bash
+npm install -g @pkulaw/mcp-cli
+```
+
+### 初始化
+
+```bash
+pkulaw-mcp init --authorization "Bearer YOUR_ACCESS_TOKEN"
+```
+
+将 `YOUR_ACCESS_TOKEN` 替换为你的真实 Token（与 MCP 协议配置使用同一个 Token）。
+
+### 常用命令
+
+| 命令 | 用途 |
+|------|------|
+| `pkulaw-mcp update` | 拉取已订阅的北大法宝服务列表 |
+| `pkulaw-mcp tools` | 列出所有可用工具 |
+| `pkulaw-mcp tools <serverId>` | 查看某个服务的所有工具和参数 |
+| `pkulaw-mcp <serverId> <tool> [params]` | 直接调用某个工具 |
+| `pkulaw-mcp check` | 检查配置完整性 |
+| `pkulaw-mcp config list` | 查看当前配置 |
+
+### 使用场景
+
+**验证 Token 是否有效**：
+```bash
+pkulaw-mcp update
+```
+
+**查看有哪些检索服务可用**：
+```bash
+pkulaw-mcp tools
+```
+
+**直接搜索法规**（不打开 Codex）：
+```bash
+pkulaw-mcp law-search search_regulations --searchKey "民法典 合同无效"
+```
+
+---
+
+## 四、验证连接
 
 配置完成后重启 Codex Desktop，输入以下任一问题测试：
 
 **chineselaw 用户**：
-`
+```
 搜索民法典关于合同无效的规定
-`
+```
 
-**北大法宝用户**：
-`
+**北大法宝 MCP 用户**：
+```
 查一下最新关于民间借贷的司法解释
-`
+```
 
-连接成功时输出中的法规引用会标注具体来源；未连接时标注 [需验证]。
+连接成功时输出中的法规引用会标注具体来源；未连接时标注 `[需验证]`。
 
-运行 .\update.ps1 可快速检查各 MCP 配置状态（显示 [OK] / [!] / [!!]）。
+运行 `.\update.ps1` 可快速检查各 MCP 配置状态（显示 [OK] / [!] / [!!]）。
 
 ---
 
-## 四、常见问题
+## 五、常见问题
 
 ### 连接器不生效？
 
-1. 确认 Token/API Key 已替换为真实值（不是 YOUR_xxx 占位符）
+1. 确认 Token/API Key 已替换为真实值（不是 `YOUR_xxx` 占位符）
 2. 确认已重启 Codex Desktop
-3. 确认 config.toml 中 enabled = true 存在
-4. 运行 .\verify.ps1 检查安装完整性
+3. 确认 `config.toml` 中 `enabled = true` 存在
+4. 使用北大法宝 CLI 验证：`pkulaw-mcp update`
+5. 运行 `.\verify.ps1` 检查安装完整性
 
 ### chineselaw 报 npx 相关错误？
 
-`powershell
+```powershell
 node --version                          # 确认 Node.js 已安装
 npm config set proxy http://127.0.0.1:7890   # 如网络受限
-`
+```
 
-### 两个连接器都要配吗？
+### 三个连接方式都要配吗？
 
-不需要。二选一即可：
-- **chineselaw**：33 个工具，覆盖法规 + 案例 + 企业信息，推荐首选
-- **北大法宝**：10 个专用服务，覆盖法规 + 案例 + 引证验证
+**不需要**。推荐组合：
+- **chineselaw**（首选，33 个工具）或 **北大法宝 MCP 协议**（10 个服务），二选一即可
+- **北大法宝 CLI** 可选安装，用于调试和脚本自动化
 
 ### 无连接器还能用吗？
 
-可以。技能会基于模型训练数据提供分析，但引用会标注 [需验证现行有效性]。
+可以。技能会基于模型训练数据提供分析，但引用会标注 `[需验证现行有效性]`。
 
 ### 我不小心损坏了 config.toml？
 
-安装脚本不会删除已有配置，只添加缺失条目。重新运行 install.ps1 即可恢复。
+安装脚本不会删除已有配置，只添加缺失条目。重新运行 `install.ps1` 即可恢复。
