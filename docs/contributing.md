@@ -3,7 +3,7 @@
 ## 仓库结构
 
 `
-codex-legal-cn-skills/
+Claude-for-Legal-CN-to-Codex/
   skills/<domain>/SKILL.md   入口定义（轻量，本仓库维护）
   install.ps1                一键安装脚本
   update.ps1                 更新脚本
@@ -50,4 +50,4 @@ MCP 连接器配置通过 install.ps1 的 Add-McpServerToConfig 函数写入 ~/.
 
 1. 确保更改不影响现有功能
 2. 更新相关文档
-3. 提交 PR 到 https://github.com/laubeing-droid/codex-legal-cn-skills
+3. 提交 PR 到 https://github.com/laubeing-droid/Claude-for-Legal-CN-to-Codex

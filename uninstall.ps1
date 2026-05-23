@@ -1,6 +1,6 @@
 ﻿<#
 .SYNOPSIS
-  卸载 Codex 中国法律技能包
+  卸载 Claude for Legal CN to Codex
 .DESCRIPTION
   删除 ~/.codex/skills/ 下所有法律技能和 ~/.codex/vendor/ 下上游内容。
   本仓库的克隆文件不受影响。
@@ -9,7 +9,7 @@
 $SkillsDir = "$env:USERPROFILE\.codex\skills"
 $VendorDir = "$env:USERPROFILE\.codex\vendor"
 
-Write-Host '=== 卸载 Codex 中国法律技能包 ===' -ForegroundColor Yellow
+Write-Host '=== 卸载 Claude for Legal CN to Codex ===' -ForegroundColor Yellow
 Write-Host ''
 
 $domains = @(

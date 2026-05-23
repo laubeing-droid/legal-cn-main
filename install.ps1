@@ -1,6 +1,6 @@
 ﻿<#
 .SYNOPSIS
-  一键安装 Codex 中国法律技能包
+  一键安装 Claude for Legal CN to Codex
 .DESCRIPTION
   1. 克隆上游法律内容 (SH88-source/claude-for-legal-CN)
   2. 安装 SKILL.md 包装层到 ~/.codex/skills/
@@ -15,7 +15,7 @@ $VendorDir = "$env:USERPROFILE\.codex\vendor"
 $UpstreamDir = "$VendorDir\claude-for-legal-CN"
 $GitUrl = 'https://github.com/SH88-source/claude-for-legal-CN.git'
 
-Write-Host '=== Codex 中国法律技能包 安装 ===' -ForegroundColor Green
+Write-Host '=== Claude for Legal CN to Codex 安装 ===' -ForegroundColor Green
 Write-Host ''
 
 # [1/4] 上游内容

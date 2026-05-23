@@ -22,7 +22,7 @@ SH88-source/claude-for-legal-CN  (持续维护版本)
 gjhcsjamin/codex-for-legal-CN  (Codex 平台封装)
         │
         ▼
-laubeing-droid/codex-legal-cn-skills  (本仓库, 全功能整合)
+laubeing-droid/Claude-for-Legal-CN-to-Codex  (本仓库, 全功能整合)
 ``
 
 ## 三、逐项目介绍
@@ -94,7 +94,7 @@ laubeing-droid/codex-legal-cn-skills  (本仓库, 全功能整合)
 - **平台**: Codex（OpenAI CLI）
 - **意义**: 首次将中国法律技能带到 Codex 平台
 
-### 7. laubeing-droid/codex-legal-cn-skills（本仓库）
+### 7. laubeing-droid/Claude-for-Legal-CN-to-Codex（本仓库）
 
 - **作者**: laubeing-droid
 - **定位**: Codex 平台的整合包装层 — 统一入口 + 自动更新 + 完整文档

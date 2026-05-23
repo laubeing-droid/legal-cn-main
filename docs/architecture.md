@@ -5,7 +5,7 @@
 本仓库采用四层架构，将入口定义、法律内容、运行环境和 MCP 连接器分离：
 
 `
-codex-legal-cn-skills                    ← 包装层（本仓库）
+Claude-for-Legal-CN-to-Codex                    ← 包装层（本仓库）
   skills/*/SKILL.md                      入口定义 + 路由规则
   install.ps1                            一键安装
   update.ps1                             手动更新

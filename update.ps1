@@ -1,6 +1,6 @@
 ﻿<#
 .SYNOPSIS
-  手动更新 Codex 中国法律技能包
+  手动更新 Claude for Legal CN to Codex
 .DESCRIPTION
   1. 从上游拉取最新内容
   2. 同步技能包装层到 ~/.codex/skills/

@@ -1,4 +1,4 @@
-﻿# Codex 中国法律技能包
+﻿# Claude for Legal CN to Codex
 
 面向中国律师的 Codex 法律工作技能集。覆盖诉讼仲裁、商事合同、劳动用工、
 数据合规、知识产权等 12 个核心法律领域，安装即用、自动更新。
@@ -10,8 +10,8 @@
 ## 快速安装
 
 ```powershell
-git clone https://github.com/laubeing-droid/codex-legal-cn-skills.git
-cd codex-legal-cn-skills
+git clone https://github.com/laubeing-droid/Claude-for-Legal-CN-to-Codex.git
+cd Claude-for-Legal-CN-to-Codex
 .\install.ps1
 ```
 
@@ -105,7 +105,7 @@ MCP 配置由独立仓库 [codex-legal-mcp-connectors](https://github.com/laubei
 ## 架构
 
 ```
-codex-legal-cn-skills                  ← 包装层（本仓库）
+Claude-for-Legal-CN-to-Codex                  ← 包装层（本仓库）
   skills/SKILL.md                      入口定义 + 路由规则
   install.ps1 / update.ps1             安装与更新
   docs/                                文档
@@ -130,7 +130,7 @@ codex-legal-cn-skills                  ← 包装层（本仓库）
 
 ```
 anthropics/claude-for-legal → zhou210712/claude-for-legal-ZH
-→ SH88-source/claude-for-legal-CN → codex-legal-cn-skills（本仓库）
+→ SH88-source/claude-for-legal-CN → Claude-for-Legal-CN-to-Codex（本仓库）
 ```
 
 详细项目分析见 docs/project-analysis.md。

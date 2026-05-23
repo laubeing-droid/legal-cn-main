@@ -1,6 +1,6 @@
 ﻿<#
 .SYNOPSIS
-  验证 Codex 中国法律技能包的安装状态
+  验证 Claude for Legal CN to Codex的安装状态
 .DESCRIPTION
   检查每个技能目录的关键文件是否存在，列出缺失项。
 #>
@@ -16,7 +16,7 @@ $domains = @(
     'law-student','legal-clinic','legal-builder-hub','ip-legal'
 )
 
-Write-Host '=== Codex 中国法律技能包 安装验证 ===' -ForegroundColor Cyan
+Write-Host '=== Claude for Legal CN to Codex 安装验证 ===' -ForegroundColor Cyan
 Write-Host ''
 
 # 检查根目录

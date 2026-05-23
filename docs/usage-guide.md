@@ -12,8 +12,8 @@
 ### 安装步骤
 
 `powershell
-git clone https://github.com/laubeing-droid/codex-legal-cn-skills.git
-cd codex-legal-cn-skills
+git clone https://github.com/laubeing-droid/Claude-for-Legal-CN-to-Codex.git
+cd Claude-for-Legal-CN-to-Codex
 .\install.ps1
 `
 
