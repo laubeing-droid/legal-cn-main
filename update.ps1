@@ -19,7 +19,7 @@ $McpRepoUrl = 'https://github.com/laubeing-droid/Codex-Claude-legal-CN-mcp-conne
 $domains = @(
     'commercial-legal','privacy-legal','product-legal','corporate-legal',
     'employment-legal','regulatory-legal','ai-governance-legal','litigation-legal',
-    'law-student','legal-clinic','legal-builder-hub','ip-legal'
+    'law-student','legal-clinic','legal-builder-hub','ip-legal','solo-law-firm'
 )
 
 Write-Host '=== 更新 Codex 中国法律技能 ===' -ForegroundColor Green
@@ -106,7 +106,7 @@ if (Test-Path "$McpDir\update.ps1") {
 # ---- [5/5] 验证安装完整性 ----
 Write-Host '[5/5] 验证安装完整性...' -ForegroundColor Yellow
 $missing = @()
-$all = $domains + @('codex-claude-legal-cn')
+$all = $domains + @('codex-claude-legal-cn'); $soloCount = 0; if (Test-Path "$SkillsDir\solo-law-firm") { Get-ChildItem -Recurse "$SkillsDir\solo-law-firm" -Filter 'SKILL.md' | ForEach-Object { $soloCount++ } }
 foreach ($name in $all) {
     if (-not (Test-Path "$SkillsDir\$name\SKILL.md")) { $missing += $name }
 }

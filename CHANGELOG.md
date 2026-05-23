@@ -1,6 +1,16 @@
 ﻿# 更新日志
 
 ## [未发布]
+
+## [2.5.0] - 2026-05-24
+- 新增 solo-law-firm 独立执业技能集（26 个自包含技能，8 个部门）
+  - 上游来源: saysoph/solo-law-firm-agents（修改版 v1.1.0）
+  - 修改记录: 合并 2 项、重命名 2 项、部门调整 1 项、新增上下游协作引用 19 项
+- 根路由 codex-claude-legal-cn 新增 solo-law-firm 关键词路由
+- install.ps1 / update.ps1 / verify.ps1 / uninstall.ps1 新增 solo-law-firm 支持
+- 新增 docs/skills-crosswalk.md 两套技能对照索引
+
+
 - upstream-monitor.yml: 修复 gjhcsjamin 仓库名误改
 
 ## [2.4.0] - 2026-05-23

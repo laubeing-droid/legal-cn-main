@@ -42,7 +42,7 @@ if (Test-Path "$UpstreamDir\README.md") {
 Write-Host '[2/4] 安装技能包装层...' -ForegroundColor Yellow
 $domains = @('commercial-legal','privacy-legal','product-legal','corporate-legal',
     'employment-legal','regulatory-legal','ai-governance-legal','litigation-legal',
-    'law-student','legal-clinic','legal-builder-hub','ip-legal')
+    'law-student','legal-clinic','legal-builder-hub','ip-legal','solo-law-firm')
 foreach ($name in $domains) {
     $srcSkill = "$RepoRoot\skills\$name\SKILL.md"
     $tgtDir = "$SkillsDir\$name"
@@ -77,6 +77,26 @@ $null = New-Item -ItemType Directory -Force $rootTgt
 Copy-Item "$RepoRoot\skills\codex-claude-legal-cn\SKILL.md" "$rootTgt\SKILL.md" -Force
 Write-Host '  技能安装完成'
 
+
+# [2.5/4] solo-law-firm 技能集（自包含，无需上游）
+Write-Host '[2.5/4] 安装 solo-law-firm 技能集...' -ForegroundColor Yellow
+$soloSrc = "$RepoRoot\skills\solo-law-firm"
+if (Test-Path $soloSrc) {
+    $soloDepts = Get-ChildItem -Directory $soloSrc
+    foreach ($dept in $soloDepts) {
+        $skills = Get-ChildItem -Directory $dept.FullName
+        foreach ($skill in $skills) {
+            $skillName = $skill.Name
+            $tgtDir = "$SkillsDir\solo-law-firm\$($dept.Name)\$skillName"
+            $null = New-Item -ItemType Directory -Force $tgtDir
+            Copy-Item "$($skill.FullName)\SKILL.md" "$tgtDir\SKILL.md" -Force
+        }
+    }
+    Write-Host "  solo-law-firm 技能安装完成"
+} else {
+    Write-Host "  [警告] solo-law-firm 技能源目录不存在，跳过" -ForegroundColor Yellow
+}
+
 # [3/4] MCP 连接器（委托到独立仓库）
 Write-Host '[3/4] 配置 MCP 连接器...' -ForegroundColor Yellow
 $McpRepoUrl = 'https://github.com/laubeing-droid/Codex-Claude-legal-CN-mcp-connectors.git'
@@ -106,12 +126,12 @@ if ($policy -eq 'Restricted') {
 
 # 验证
 $missing = @()
-$all = $domains + @('codex-claude-legal-cn')
+$all = $domains + @('codex-claude-legal-cn'); $soloCount = 0; if (Test-Path "$SkillsDir\solo-law-firm") { Get-ChildItem -Recurse "$SkillsDir\solo-law-firm" -Filter 'SKILL.md' | ForEach-Object { $soloCount++ } }
 foreach ($name in $all) {
     if (-not (Test-Path "$SkillsDir\$name\SKILL.md")) { $missing += $name }
 }
 if ($missing.Count -eq 0) {
-    Write-Host "  OK: $($all.Count) 个技能" -ForegroundColor Green
+    Write-Host "  OK: $($all.Count) 个入口技能 + $soloCount 个 solo-law-firm 技能" -ForegroundColor Green
 } else {
     Write-Host "  缺失: $($missing -join ', ')" -ForegroundColor Red
     exit 1

@@ -13,7 +13,7 @@ $domains = @(
     'codex-claude-legal-cn',
     'commercial-legal','privacy-legal','product-legal','corporate-legal',
     'employment-legal','regulatory-legal','ai-governance-legal','litigation-legal',
-    'law-student','legal-clinic','legal-builder-hub','ip-legal'
+    'law-student','legal-clinic','legal-builder-hub','ip-legal','solo-law-firm'
 )
 
 Write-Host '=== Claude for Legal CN to Codex 安装验证 ===' -ForegroundColor Cyan
@@ -52,6 +52,18 @@ if (Test-Path "$UpstreamDir\.git") {
     Write-Host "[OK] 上游缓存: $UpstreamDir" -ForegroundColor Green
 } else {
     Write-Host "[!]  上游缓存不存在（运行 install.ps1 后会自动克隆）" -ForegroundColor Yellow
+}
+
+
+# solo-law-firm 技能集检查
+Write-Host ''
+Write-Host '--- solo-law-firm 技能集 ---' -ForegroundColor Cyan
+$soloBase = "$SkillsDir\solo-law-firm"
+if (Test-Path $soloBase) {
+    $soloSkills = Get-ChildItem -Recurse "$soloBase" -Filter 'SKILL.md'
+    Write-Host "  [OK] solo-law-firm: $($soloSkills.Count) 个自包含技能" -ForegroundColor Green
+} else {
+    Write-Host "  [!]  solo-law-firm 目录不存在，请运行 install.ps1" -ForegroundColor Yellow
 }
 
 # 总结

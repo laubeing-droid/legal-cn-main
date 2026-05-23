@@ -16,7 +16,7 @@ $domains = @(
     'codex-claude-legal-cn',
     'commercial-legal','privacy-legal','product-legal','corporate-legal',
     'employment-legal','regulatory-legal','ai-governance-legal','litigation-legal',
-    'law-student','legal-clinic','legal-builder-hub','ip-legal'
+    'law-student','legal-clinic','legal-builder-hub','ip-legal','solo-law-firm'
 )
 
 Write-Host '[1/2] 删除技能目录...'
