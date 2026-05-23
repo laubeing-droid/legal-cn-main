@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch upstream commits and compare
+      - name: Fetch upstream updates (git repos + npm packages)
         id: fetch
         run: |
           CACHE_FILE=".upstream-last-check"
@@ -23,6 +23,7 @@ jobs:
           REPORT+="检查时间: $(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A"
           CHANGED=false
 
+          # --- Git repos ---
           check_repo() {
             LABEL="$1"
             REPO="$2"
@@ -32,7 +33,6 @@ jobs:
             LATEST=$(echo "$COMMITS" | jq -r '.[0].sha // "unknown"')
             REPORT+=$(echo "$COMMITS" | jq -r '.[] | "- " + (.commit.message[0:80] | gsub("\\n"; " ")) + " (" + .sha[0:7] + ")"' 2>/dev/null | sed 's/$/%0A/')
             REPORT+="%0A%0A"
-
             if [ -f "$CACHE_FILE" ]; then
               OLD=$(grep "^$REPO=" "$CACHE_FILE" 2>/dev/null | cut -d= -f2 || echo "")
               if [ "$OLD" != "$LATEST" ] && [ "$LATEST" != "unknown" ] && [ -n "$LATEST" ]; then
@@ -41,13 +41,36 @@ jobs:
             else
               CHANGED=true
             fi
-            echo "$LATEST" > /tmp/sha_$(echo "$REPO" | tr '/' '_')
+          }
+
+          # --- npm packages ---
+          check_npm() {
+            LABEL="$1"
+            PKG="$2"
+            REPORT+="### $LABEL%0A"
+            REPORT+="- npm: $PKG%0A"
+            INFO=$(curl -s "https://registry.npmjs.org/$PKG/latest")
+            LATEST=$(echo "$INFO" | jq -r '.version // "unknown"')
+            DESC=$(echo "$INFO" | jq -r '.description // ""' | head -c 120)
+            REPORT+="- 最新版本: $LATEST%0A"
+            REPORT+="- 说明: $DESC%0A"
+            REPORT+="%0A%0A"
+            if [ -f "$CACHE_FILE" ]; then
+              OLD=$(grep "^npm:$PKG=" "$CACHE_FILE" 2>/dev/null | cut -d= -f2 || echo "")
+              if [ "$OLD" != "$LATEST" ] && [ "$LATEST" != "unknown" ] && [ -n "$LATEST" ]; then
+                CHANGED=true
+              fi
+            else
+              CHANGED=true
+            fi
           }
 
           check_repo "Anthropic 原版" "anthropics/claude-for-legal"
           check_repo "中文汉化版" "zhou210712/claude-for-legal-ZH"
           check_repo "当前直接上游" "SH88-source/claude-for-legal-CN"
           check_repo "Codex 封装版" "gjhcsjamin/codex-for-legal-CN"
+          check_npm "chineselaw-mcp（元典智库 MCP）" "chineselaw-mcp"
+          check_npm "@pkulaw/mcp-cli（北大法宝 CLI）" "@pkulaw/mcp-cli"
 
           echo "report=$REPORT" >> $GITHUB_OUTPUT
           echo "changed=$CHANGED" >> $GITHUB_OUTPUT
@@ -81,14 +104,22 @@ jobs:
               });
             }
 
-      - name: Cache last commit SHAs
+      - name: Cache last check state
         run: |
           CACHE_FILE=".upstream-last-check"
           > "$CACHE_FILE"
+          # Git repos
           for repo in anthropics/claude-for-legal zhou210712/claude-for-legal-ZH SH88-source/claude-for-legal-CN gjhcsjamin/codex-for-legal-CN; do
             sha=$(curl -s "https://api.github.com/repos/$repo/commits?per_page=1" | jq -r '.[0].sha // ""')
             if [ -n "$sha" ]; then
               echo "$repo=$sha" >> "$CACHE_FILE"
+            fi
+          done
+          # npm packages
+          for pkg in chineselaw-mcp @pkulaw/mcp-cli; do
+            ver=$(curl -s "https://registry.npmjs.org/$pkg/latest" | jq -r '.version // ""')
+            if [ -n "$ver" ]; then
+              echo "npm:$pkg=$ver" >> "$CACHE_FILE"
             fi
           done
           git config user.name "github-actions"
