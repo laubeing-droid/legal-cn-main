@@ -95,3 +95,16 @@ cd Claude-for-Legal-CN-to-Codex
 - **PRC-US-Legal-Semantic-Alignment-Framework**（自研，本仓库独有）
 - **Codex-Claude-legal-cn-mcp-hub**（MCP 连接器独立仓库）
 - 上游仓库均不作运行依赖（参考窗口模式）
+
+---
+
+## 致谢
+
+本仓库整合了以下开源项目的成果，详见 [CREDITS.md](CREDITS.md)：
+
+| 项目 | 贡献 |
+|:-----|:-----|
+| [anthropics/claude-for-legal](https://github.com/anthropics/claude-for-legal) | 原始法律 AI 框架（Apache 2.0） |
+| [zhou210712/claude-for-legal-ZH](https://github.com/zhou210712/claude-for-legal-ZH) | 中国汉化版主体内容 |
+| [MAXXXXXLI/workbuddy-cn-legal-skills](https://github.com/MAXXXXXLI/workbuddy-cn-legal-skills) | 中国法律语境文件 |
+| [saysoph/solo-law-firm-agents](https://github.com/saysoph/solo-law-firm-agents) | 独立执业技能（MIT） |
