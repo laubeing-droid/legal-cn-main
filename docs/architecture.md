@@ -1,119 +1,77 @@
-﻿# 架构说明
+﻿# 架构文档
 
-## 项目定位
+> 最后更新：2026-05-25
 
-**Claude for Legal CN to Codex** 是一个包装层项目。它将两套技能体系以 Codex Desktop 可识别的格式部署到用户环境，并在此基础上自行研发新技能补全业务闭环：
-- [zhou210712/claude-for-legal-ZH](https://github.com/zhou210712/claude-for-legal-ZH) — 12 领域法律工作流（薄入口 + 上游 CLAUDE.md）
-- [saysoph/solo-law-firm-agents](https://github.com/saysoph/solo-law-firm-agents) — 26 个自包含执业技能（厚 SKILL.md，修改版）。**本仓库在此之上新增 1 个自研技能，合计 27 个。**
+---
 
-## 五层架构
+## 架构原则
 
-`
-+----------------------------------------------------+
-| Claude-for-Legal-CN-to-Codex      <- packaging     |
-| skills/*/SKILL.md   install.ps1    docs/            |
-| skills/solo-law-firm/     self-contained (27)      |
-|        |                     |                      |
-|        v                     v                      |
-| +--------------+   +--------------------+          |
-| | Content A     |   | Content B          |          |
-| | ~/.codex/     |   | skills/solo-law-   |          |
-| | vendor/       |   | firm/              |          |
-| | claude-for-   |   | (self-contained,   |          |
-| | legal-CN/     |   |  no upstream)      |          |
-| | CLAUDE.md +   |   +--------------------+          |
-| | references    |                                   |
-| +------+-------+                                    |
-|        v                                            |
-| Runtime  ~/.codex/skills/<domain>/                  |
-| SKILL.md + CLAUDE.md + references                   |
-|        |                                            |
-|        v                                            |
-| MCP  ~/.codex/config.toml  [mcp_servers]            |
-+----------------------------------------------------+
-`
+1. **本地即真相**：所有技能内容以本仓库 `skills/` 为准，install/update 直接部署。
+2. **上游是参考窗口**：4 个上游仓库通过 GitHub Actions + diff-tool 监控，不自动同步。
+3. **委托非重复**：MCP 连接器交给独立仓库管理。
+4. **来源可追溯**：patches/ 保持上游快照，diff-tool 哈希比对，`-Diff` 行级差异。
 
-## 各层职责
+---
 
-| 层级 | 内容 | 维护者 |
-|------|------|--------|
-| 包装层 | SKILL.md（入口定义）、安装脚本、文档 | 本仓库 |
-| 内容层A（claude-for-legal） | CLAUDE.md（工作流指令）、references（法条参考） | 上游 zhou210712 |
-| 内容层B（solo-law-firm） | 自包含 SKILL.md（完整角色 prompt + 模板），含本仓库自研技能 | 上游 saysoph（本仓库修改版 + 自研） |
-| 运行层 | skills/ 下各领域执行目录 | install.ps1 自动管理 |
-| MCP 层 | chineselaw + 北大法宝连接器配置 | Codex-Claude-legal-cn-mcp-hub |
+## 分层结构
 
-## 两套技能架构对比
+```
+┌──────────────────────────────────────────────┐
+│              上游监控层                        │
+│  .github/workflows/upstream-monitor.yml       │
+│  + 4 个 diff-tool 脚本                         │
+│  → 每周一检查，有更新提 Issue                  │
+└──────────────┬───────────────────────────────┘
+               │ 不自动写入
+┌──────────────▼───────────────────────────────┐
+│              内容层（本仓库 skills/）          │
+│                                               │
+│  12 个法律领域（skills/*/）                    │
+│  ├── SKILL.md       ← 本仓库维护的入口         │
+│  ├── CLAUDE.md      ← 本仓库维护的工作流       │
+│  ├── references/    ← 中国法引用 + 对齐文件    │
+│  ├── skills/*/SKILL.md ← 子技能               │
+│  └── agents/        ← 代理                    │
+│                                               │
+│  solo-law-firm（skills/solo-law-firm/）       │
+│  └── 01-08 科室/技能/SKILL.md（27 个）         │
+│                                               │
+│  knowledge-base（skills/knowledge-base/）     │
+│  └── 22 部中国法律官方 PDF                     │
+│                                               │
+│  references（skills/references/）             │
+│  └── 护栏文件                                 │
+└──────────────┬───────────────────────────────┘
+               │ install/update → ~/.codex/skills/
+┌──────────────▼───────────────────────────────┐
+│              快照层（patches/）                │
+│  workflows/  ← CLAUDE.md 快照                 │
+│  connectors/ ← .mcp.json 快照                 │
+│  sub-skills/ ← 子技能快照（150+）              │
+│  references/ → 语境 + 对齐 + 护栏             │
+│  guards/     → 护栏文件                        │
+│  metadata/   → marketplace/NOTICE             │
+└──────────────────────────────────────────────┘
+```
 
-| 维度 | claude-for-legal-CN | solo-law-firm |
-|------|---------------------|---------------|
-| 入口格式 | 薄 SKILL.md（路由 + 关键词） | 厚 SKILL.md（完整角色定义） |
-| 核心内容 | 委托上游 CLAUDE.md | 自包含（模板、流程、禁止项） |
-| 更新方式 | 自动 git pull 上游 | GitHub Actions 自动同步 PR |
-| 安装目录 | ~/.codex/skills/<domain>/ | ~/.codex/skills/solo-law-firm/ |
-| 适用场景 | 法律专业深度分析 | 执业全流程运营 + 本仓库自研补全 |
+## 部署流程
 
-## 本仓库对 solo-law-firm 的修改与贡献
+```
+install.ps1 / update.ps1
+  ├── 遍历 skills/ 每个领域
+  │   ├── 复制 SKILL.md / CLAUDE.md / README.md
+  │   ├── 复制 references/* / skills/*/ / agents/*
+  ├── 单独处理 solo-law-firm（嵌套 8 科室结构）
+  ├── 克隆 MCP 连接器仓库
+  └── 验证完整性
+```
 
-| 类型 | 数量 | 说明 |
-|------|:------:|------|
-| 上游技能（saysoph 原创） | 26 | 经格式适配、合并优化、引用补全后纳入 |
-| **本仓库自研新增** | **1** | **trial-outline-generator（庭审提纲自动生成器）** — 补齐从证据分析到庭前核查之间的开庭提纲环节 |
-| 合并优化 | 2 组 | case-progress-reporter + evidence-manager → evidence-analyst；statute-monitor → regulatory-change-monitor |
-| 重命名 | 2 项 | 中文技能名重新命名以匹配 Codex 命名规范 |
-| 协作引用补全 | 19 项 | 补全上下游技能协作关系表 |
+## 上游检测流程
 
-> 所有修改均通过 metadata 字段（`original-name`、`merged-from`）标明上游来源。GitHub Actions 对已合并/重命名的技能跳过自动同步，确保本仓库的修改不会被上游覆盖。
-
-## 设计原则
-
-1. **两层分离**：包装层只维护 SKILL.md（入口），工作流指令来自上游
-2. **自包含共存**：solo-law-firm 为自包含厚技能，不依赖上游 CLAUDE.md
-3. **自主补全**：上游未覆盖的场景由本仓库自行研发补全，确保业务流程闭环
-4. **自动同步**：claude-for-legal 每次启用时 git pull；solo-law-firm 每周 Actions 自动检测
-5. **委托而非重复**：MCP 连接器管理委托给独立仓库
-6. **原生格式**：使用 Codex Desktop 的 config.toml [mcp_servers] 格式
-7. **零额外依赖**：除 Git 和 Codex Desktop 外无其他系统依赖
-8. **来源可追溯**：所有 from-upstream 修改通过 metadata 标明原始来源
-
-## 更新流程
-
-### claude-for-legal 更新
-`
-用户触发法律任务
-  -> 根技能 claude-legal-cn 激活
-    -> 自动 git pull 上游 zhou210712 最新内容
-      -> 同步 CLAUDE.md + references 到 ~/.codex/skills/
-        -> 检查 config.toml MCP 状态
-          -> 读取最新工作流指令
-            -> 完成法律任务
-`
-
-### solo-law-firm 更新
-`
-GitHub Actions 每周一触发
-  -> 检测 saysoph/solo-law-firm-agents 最新提交
-    -> 对比本地缓存 SHA
-      +-- 无变化 -> 跳过
-      +-- 有新提交
-          +-- 新增技能 -> 自动按 department 放入对应目录
-          +-- 已合并技能 -> 跳过（标记需人工审核）
-          +-- 本仓库自研技能 -> 跳过（不在上游检测范围内）
-          +-- 创建 PR (label: upstream-sync) -> 人工审核合并
-`
-
-## 上游监测
-
-| 监测目标 | 方式 | 频率 |
-|---------|------|------|
-| claude-for-legal 上游链（4 仓库） | Issue 通知 | 每周一 |
-| npm 包更新（2 包） | Issue 通知 | 每周一 |
-| solo-law-firm-agents | 自动同步 PR | 每周一 |
-
-## 依赖关系
-
-- **zhou210712/claude-for-legal-ZH**（Apache 2.0）— claude-for-legal 直接上游
-- **saysoph/solo-law-firm-agents**（MIT）— solo-law-firm 上游，**本仓库持有修改版 + 自研新增**
-- **Codex-Claude-legal-cn-mcp-hub**（独立仓库）— MCP 连接器管理
-
-
+```
+diff-tool-zhou.ps1
+  ├── 拉取 zhou210712 到 TEMP
+  ├── 哈希比对 patches/ 快照 vs 上游
+  ├── 颜色标记：绿✓ 黄Δ 紫+ 红？
+  └── -Diff 参数：行级 git diff
+```

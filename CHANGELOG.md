@@ -32,3 +32,31 @@
 
 ## [1.4.0-1.0.0] - 2026-05-23
 - MCP 闆嗘垚銆佹灦鏋勬暣鏀广€佹枃妗ｄ綋绯绘惌寤恒€佸垵濮嬪彂甯?
+
+## [2.8.0] - 2026-05-25
+### 架构变更
+- 断开 zhou210712 上游依赖，改为本地部署+参考窗口模式
+- 断开 saysoph 上游自动同步，仅保留监控
+- 断开 solo-law-firm 自动同步（GitHub Actions 去掉了 sync job）
+- install/update/uninstall/verify 全部改从本仓库 skills/ 部署
+
+### 中国化
+- deposition-prep → 调查取证准备（完整重写）
+- legal-hold → 证据保全与留存（完整重写）
+- subpoena-triage → 司法协查响应（完整重写）
+- cease-desist → 律师函生成（改名，内容已是中国法）
+- privilege-log-review → 删除（中国无此制度）
+- 同步更新所有跨文件命令引用（CLAUDE.md/README.md/SKILL.md）
+
+### 工具增强
+- diff-tool-zhou: 新增 150+ 子技能跟踪 + -Diff 行级差异 + -Update 快照
+- diff-tool-max: 新增子技能提取 + -Diff + -Update
+- 新增 diff-tool-solo: saysoph 上游比对（中文→英文名映射）
+- install/update: solo-law-firm 独立部署逻辑（嵌套 8 科室结构）
+
+### 清理
+- 删除 patches/references/laws/（11 个旧法条文件，已被 qulv 替代）
+- 删除 patches/full/（79 KB 完整框架，已拆分为 alignment + guards）
+- 删除 docs/gjhcsjamin-adaptation-analysis.md（上游已移除）
+- 移除 @pkulaw/mcp-cli 监控（属 MCP 仓库范畴）
+- 全量重写 docs/ 文档体系（适配当前架构）

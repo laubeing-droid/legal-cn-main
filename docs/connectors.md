@@ -1,27 +1,24 @@
 ﻿# MCP 连接器
 
-本仓库的 MCP 连接器配置委托给独立仓库管理。
+MCP 连接器由独立仓库 [Codex-Claude-legal-cn-mcp-hub](https://github.com/laubeing-droid/Codex-Claude-legal-cn-mcp-hub) 管理。
+本仓库的 `install.ps1` 和 `update.ps1` 自动克隆并调用其安装脚本。
 
-> **Codex-Claude-legal-cn-mcp-hub**
-> https://github.com/laubeing-droid/Codex-Claude-legal-cn-mcp-hub
+## 配置凭证
 
-`install.ps1` 和 `update.ps1` 会自动克隆并调用该仓库的安装/更新脚本。
+编辑 `~/.codex/config.toml`，替换对应 API Key：
 
-## 连接器概览
+```toml
+[mcp_servers.chineselaw]
+command = "npx"
+args = ["-y", "@pkulaw/mcp-cli"]
+env = { CHINESELAW_API_KEY = "你的密钥" }
 
-| 连接器 | 方式 | 工具数 | 推荐 |
-|--------|------|--------|------|
-| **chineselaw（元典智库）** | stdio | 33 | ⭐ 首选 |
-| **北大法宝 MCP 协议** | HTTP | 10 服务 | 推荐 |
-| **北大法宝 CLI** | 命令行 | — | 调试/验证 |
-
-## 快速配置
-
-```powershell
-notepad "$env:USERPROFILE\.codex\config.toml"
+[mcp_servers.feishu]
+command = "npx"
+args = ["-y", "@yuri2/feishu-mcp"]
+env = { FEISHU_APP_ID = "...", FEISHU_APP_SECRET = "..." }
 ```
 
-- **chineselaw**：替换 `CHINESELAW_API_KEY`（注册：https://open.chineselaw.com）
-- **北大法宝**：替换所有 `YOUR_ACCESS_TOKEN`（注册：https://mcp.pkulaw.com）
+## 安全
 
-详细配置指南和工具列表请查看独立仓库的文档。
+API 密钥通过 `config.toml` 或环境变量注入，**切勿提交到 Git**。

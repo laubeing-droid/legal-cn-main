@@ -1,4 +1,8 @@
-﻿# MAXXXXXLI/workbuddy-cn-legal-skills → anthropics/claude-for-legal 对比分析
+﻿> **⚠️ 当前状态（2026-05-25）：**
+> MAXXXXXLI 上游已断开自动同步（参考窗口模式）。14 个语境文件通过 diff-tool-max.ps1 监控。
+> 本分析反映的是 MAXXXXXLI 原始适配状态，供追溯参考。
+
+---# MAXXXXXLI/workbuddy-cn-legal-skills → anthropics/claude-for-legal 对比分析
 
 > 分析日期：2026-05-24
 > 对比对象：anthropics/claude-for-legal（美国法原版）vs MAXXXXXLI/workbuddy-cn-legal-skills（WorkBuddy 中国法版）
@@ -206,4 +210,5 @@ MAXXXXXLI 是唯一一个把 anthropic 的法律工作流带到**非 Claude/Code
 | WorkBuddy 格式 | 你的目标是 Codex，不是豆包 |
 | 保留完整英文原文 | 你的用户是中国律师，不需要看英文流程 |
 | 151 个独立 ZIP | Codex 的 SKILL.md 聚合粒度更适合场景路由 |
+
 

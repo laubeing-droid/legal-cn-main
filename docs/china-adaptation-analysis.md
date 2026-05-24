@@ -1,4 +1,8 @@
-﻿# anthropics/claude-for-legal → zhou210712/claude-for-legal-ZH 中国化适配全量分析
+﻿> **⚠️ 当前状态（2026-05-25）：**
+> zhou210712 上游已断开自动同步（参考窗口模式）。zhou210712 的 9 个法律引用文件已被 qulv 知识库（22 部官方 PDF）替代。
+> 本分析反映的是 zhou210712 原始适配状态，供追溯参考。
+
+---# anthropics/claude-for-legal → zhou210712/claude-for-legal-ZH 中国化适配全量分析
 
 > 分析日期：2026-05-24
 > 对比对象：anthropics/claude-for-legal（美国法原版）vs zhou210712/claude-for-legal-ZH（中国法适配版）
@@ -218,6 +222,7 @@
 2. **工作流框架未改动**。审查流程、升级机制、质量检查等"怎么做"的部分保留了 anthropic 的框架，只替换了"依据什么"的法律内容。
 
 3. **技能内容整体缩减 29%**。cold-start interview 大幅缩小，部分技能（claim-chart, cease-desist）精简超过 70%。部分缩减是合理的（去掉美国特有内容），但部分可能丢失了有价值的质量控制细节。
+
 
 
 
