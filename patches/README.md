@@ -4,14 +4,12 @@
 
 | 路径 | 来源 | 文件数 |
 |------|------|:------:|
-| references/laws/ | zhou210712 中国法引用 | 11 |
 | references/context/ | MAXXXXXLI 法源语境 | 14 |
 | references/alignment/ | 自研框架·中美概念映射 | 12 |
 | workflows/ | zhou210712 中文化工作流 | 12 |
 | connectors/ | zhou210712 MCP 配置 | 12 |
 | guards/ | 自研框架·阻断/元规则 | 6 |
 | metadata/ | 汇总 | 5 |
-| full/ | 自研框架·原文 | 1 |
 
 ## 检查更新
 

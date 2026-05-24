@@ -9,17 +9,6 @@ else { if (Test-Path $UpstreamDir) { Remove-Item -Recurse -Force $UpstreamDir };
 Push-Location $UpstreamDir; $c=git log -1 --format='%h'; $d=git log -1 --format='%ci'; Pop-Location
 Write-Host "  $c $d"
 $files=@(
-  @{N='references/laws/contract-law-core.md';U='commercial-legal/references/contract-law-core.md'}
-  @{N='references/laws/civil-procedure-core.md';U='litigation-legal/references/civil-procedure-core.md'}
-  @{N='references/laws/evidence-rules-core.md';U='litigation-legal/references/evidence-rules-core.md'}
-  @{N='references/laws/enforcement-core.md';U='litigation-legal/references/enforcement-core.md'}
-  @{N='references/laws/labor-core-rules.md';U='employment-legal/references/labor-core-rules.md'}
-  @{N='references/laws/company-law-2024-core.md';U='corporate-legal/references/company-law-2024-core.md'}
-  @{N='references/laws/ip-core-rules.md';U='ip-legal/references/ip-core-rules.md'}
-  @{N='references/laws/admin-law-core.md';U='regulatory-legal/references/admin-law-core.md'}
-  @{N='references/laws/pipil-core-provisions.md';U='privacy-legal/references/pipil-core-provisions.md'}
-  @{N='references/laws/ai-governance-core.md';U='ai-governance-legal/references/ai-governance-core.md'}
-  @{N='references/laws/currency-watch.md';U='ai-governance-legal/references/currency-watch.md'}
 )
 $domains=@('commercial-legal','litigation-legal','employment-legal','privacy-legal','corporate-legal','ip-legal','product-legal','regulatory-legal','ai-governance-legal','law-student','legal-clinic','legal-builder-hub')
 foreach ($d in $domains) { $files+=@{N="workflows/$d.CLAUDE.md";U="$d/CLAUDE.md"} }
