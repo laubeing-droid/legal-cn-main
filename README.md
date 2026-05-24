@@ -1,37 +1,12 @@
 ﻿# Claude for Legal CN to Codex
 
-## 🔴 只有这个仓库做了的事
+将 Anthropic 法律 AI 整合中国化并移植到 Codex Desktop 的一站式技能部署包。
 
-### 1. PRC-US 法律语义对齐框架（自研）
-市面上所有版本（zhou210712、MAXXXXXLI、gjhcsjamin）都只是"把美国法改成中文名"。
-**PRC-US 法律语义对齐框架** — 12 个领域逐一进行中美法律概念映射，配套 8 个阻断护栏，防止 AI 输出美国法概念（如 discovery、deposition、privilege）。
+覆盖商事合同、诉讼仲裁、劳动用工、数据合规、知识产权等 12 个法律领域 + 独立执业技能集。从法条引用到工作流指令、从 MCP 连接到护栏阻断，逐层适配中国法律体系。
 
-### 2. 官方 PDF 全文入库（qulv）
-**qulv 知识库包含 22 部中国法律官方 PDF 全文**（民法典 1062 条、公司法 248 条等），可逐条检索引用。
+---
 
-### 3. 三上游整合
-`zhou210712` 的法条 + `MAXXXXXLI` 的语境 + `saysoph` 的独立执业技能——  
-**只有这个仓库把它们放在一起**，做成了一键安装包。其他版本都只依赖单一路径。
-
-### 4. 参考窗口架构（独创）
-上游更新了，**不会自动覆盖你的修改**。  
-4 路 diff-tool 各自跟踪一个上游，告诉你"他改了啥，你看要不要抄"。  
-
-
-### 5. 五个美国法子技能重写
-不是翻译，是**法律重写**：
-
-| 原名（美国法） | 现名（中国法） | 这是什么 |
-|:--------------|:-------------|:---------|
-| deposition-prep | 调查取证准备 | 中国只有调查令，没有 deposition |
-| legal-hold | 证据保全与留存 | 中国没有 legal hold 义务 |
-| subpoena-triage | 司法协查响应 | 中国只有法院调查令，没有 subpoena |
-| cease-desist | 律师函生成 | 本身就是中国律师函 |
-| privilege-log-review | 已删除 | 中国没这个制度，留着会误导 |
-
-### 6. MCP 连接器独立管理
-别人把 API Key 硬编码在配置里。  
-你把 MCP 拆成独立仓库，隔离凭证、分离关注点、可独立更新。
+> **免责**：所有 AI 输出均为律师辅助草稿，不构成正式法律意见，需经执业律师审查。
 
 ---
 
@@ -43,60 +18,88 @@ cd Claude-for-Legal-CN-to-Codex
 .\install.ps1
 ```
 
----
-
-## 适配全景
-
-| 适配层 | 上游做了什么 | **本仓库额外做了什么** |
-|:-------|:-----------|:---------------------|
-| 法条引用 | zhou210712: 9 个摘要文件 | **22 部官方 PDF 全文** |
-| 子技能 | zhou210712: 精简 29%，加中文注释 | **5 个全量重写为中国版** |
-| 工作流 | zhou210712: UI 中文化 | **全中文 + 护栏注入** |
-| MCP 连接 | zhou210712: 替换为中国工具 | **独立 MCP Hub 仓库管理** |
-| 概念对齐 | 上游版本未覆盖 | **12 领域 PRC-US 映射 + 8 护栏** |
-| 语境 | MAXXXXXLI: 14 个语境文件 | **整合进 12 领域 + 自研补充** |
-| 独立执业 | saysoph: 26 个技能 | **补充庭审提纲等缺失环节** |
-| 上游监控 | 上游版本未覆盖 | **4 路 diff-tool 参考窗口** |
+重启 Codex Desktop 即可使用。
 
 ---
 
-## 上游关系
+## 功能全景
 
-| 上游 | 角色 |
+| 维度 | 说明 |
+|:-----|:------|
+| **法律领域** | 12 个（商事合同 / 诉讼仲裁 / 劳动用工 / 数据合规 / 公司交易 / 知识产权 / 产品合规 / 监管合规 / AI 治理 / 法学教育 / 法律援助 / 技能构建器） |
+| **子技能** | 150+（审查合同、起草律师函、分析管辖权、评估合规风险等） |
+| **独立执业技能** | 27 个（8 个科室：案件实务 / 案件管理 / 客户关系 / 尽职调查 / 市场拓展 / 财务行政 / 知识管理 / 合规风控） |
+| **法条引用** | 22 部中国法律官方 PDF 全文（qulv 知识库） |
+| **PRC-US 概念对齐** | 12 个领域的中美法律概念映射 + 8 个护栏文件 |
+| **MCP 连接器** | 12 个领域的中国法律工具链，由独立仓库管理 |
+
+---
+
+## 适配内容
+
+### 子技能中国化
+
+5 个美国法子技能在中国法律体系下做了进一步适配：
+
+| 原名 | 现名 | 适配方式 |
+|:-----|:-----|:---------|
+| deposition-prep | 调查取证准备 | 重写为调查令/证据保全/质证流程 |
+| legal-hold | 证据保全与留存 | 重写为公证保全/诉前保全/电子数据固化 |
+| subpoena-triage | 司法协查响应 | 重写为调查令/协查通知/监管调证响应 |
+| cease-desist | 律师函生成 | 改名（内容已适配中国法） |
+| privilege-log-review | 已删除 | 中国无此制度 |
+
+### 工作流中文化
+
+12 个领域的 CLAUDE.md 全部中文化，包括：
+- UI 标题、提示文本、冷启动对话
+- 审批矩阵、升级路径
+- 法律依据引用替换为中国法
+
+### MCP 连接器替换
+
+| 原版（美国工具） | 替换为（中国工具） |
+|:----------------|:-----------------|
+| Ironclad | e签宝 |
+| DocuSign | 法大大 |
+| iManage | 飞书 |
+| TopCounsel | 元典法律检索 |
+| Westlaw / LexisNexis | 北大法宝 |
+
+MCP 连接器由独立仓库 [Codex-Claude-legal-cn-mcp-hub](https://github.com/laubeing-droid/Codex-Claude-legal-cn-mcp-hub) 管理。
+
+---
+
+## 上游来源
+
+本仓库整合了以下开源项目的内容：
+
+| 项目 | 贡献范围 |
+|:-----|:---------|
+| [anthropics/claude-for-legal](https://github.com/anthropics/claude-for-legal) | 150+ 子技能的原始框架设计 |
+| [zhou210712/claude-for-legal-ZH](https://github.com/zhou210712/claude-for-legal-ZH) | 12 个领域 CLAUDE.md + MCP 连接器的中文化 |
+| [MAXXXXXLI/workbuddy-cn-legal-skills](https://github.com/MAXXXXXLI/workbuddy-cn-legal-skills) | 14 个中国法语境文件 |
+| [saysoph/solo-law-firm-agents](https://github.com/saysoph/solo-law-firm-agents) | 26 个独立执业技能（MIT） |
+
+各上游已断开自动同步，通过 GitHub Actions + 4 路 diff-tool 监控变更（参考窗口模式）。
+详细致谢见 [CREDITS.md](CREDITS.md)。
+
+---
+
+## 自研内容
+
+以下内容由本仓库自行研发，不涉及上游：
+
+- **PRC-US 法律语义对齐框架** — 12 个领域中美法律概念一对一映射 + 配套护栏
+- **qulv 知识库** — 22 部中国法律官方 PDF 全文
+- **4 路 diff-tool 参考窗口架构** — zhou210712 / MAXXXXXLI / saysoph / 自研框架各一路独立比对
+- **MCP 连接器独立仓库** — 与技能内容解耦管理
+
+---
+
+## 相关仓库
+
+| 仓库 | 用途 |
 |:-----|:-----|
-| anthropics/claude-for-legal | 原始美国法框架（参考） |
-| zhou210712/claude-for-legal-ZH | 中国汉化版内容来源（参考窗口） |
-| MAXXXXXLI/workbuddy-cn-legal-skills | 中国法语境文件（参考窗口） |
-| saysoph/solo-law-firm-agents | 独立执业技能（参考窗口） |
-| **PRC-US-Legal-Semantic-Alignment-Framework** | **自研对齐框架（本仓库独有）** |
-
-```powershell
-# 检查上游有无更新
-.\patches\diff-tool-zhou.ps1
-.\patches\diff-tool-zhou.ps1 -Diff   # 看改了哪行
-.\patches\diff-tool-zhou.ps1 -Update # 决定同步后更新快照
-```
-
----
-
-## 依赖
-
-- **Codex Desktop**（运行环境）
-- **PRC-US-Legal-Semantic-Alignment-Framework**（自研，本仓库独有）
-- **Codex-Claude-legal-cn-mcp-hub**（MCP 连接器独立仓库）
-- 上游仓库均不作运行依赖（参考窗口模式）
-
----
-
-## 致谢
-
-本仓库整合了以下开源项目的成果，详见 [CREDITS.md](CREDITS.md)：
-
-| 项目 | 贡献 |
-|:-----|:-----|
-| [anthropics/claude-for-legal](https://github.com/anthropics/claude-for-legal) | 原始法律 AI 框架（Apache 2.0） |
-| [zhou210712/claude-for-legal-ZH](https://github.com/zhou210712/claude-for-legal-ZH) | 中国汉化版主体内容 |
-| [MAXXXXXLI/workbuddy-cn-legal-skills](https://github.com/MAXXXXXLI/workbuddy-cn-legal-skills) | 中国法律语境文件 |
-| [saysoph/solo-law-firm-agents](https://github.com/saysoph/solo-law-firm-agents) | 独立执业技能（MIT） |
-
-
+| [PRC-US-Legal-Semantic-Alignment-Framework](https://github.com/laubeing-droid/PRC-US-Legal-Semantic-Alignment-Framework) | 自研中美概念对齐框架 |
+| [Codex-Claude-legal-cn-mcp-hub](https://github.com/laubeing-droid/Codex-Claude-legal-cn-mcp-hub) | MCP 连接器独立管理 |
