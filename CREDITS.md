@@ -45,6 +45,16 @@
 | **贡献** | 26 个独立执业技能（8 个科室），覆盖案件实务、案件管理、客户关系、尽职调查、市场拓展、财务行政、知识管理、合规风控。本仓库在此基础上新增了庭审提纲生成器。 |
 | **本仓库引用** | `skills/solo-law-firm/`（经格式适配和技能名映射后纳入） |
 
+### Daknniel-0881/qulv-china-legal-counsel-skill
+
+| | |
+|:-----|:-----|
+| **作者** | Daknniel-0881 |
+| **仓库** | https://github.com/Daknniel-0881/qulv-china-legal-counsel-skill |
+| **许可** | 开源 |
+| **贡献** | 22 部中国法律官方 PDF/文本，覆盖民法典、公司法、劳动法、知识产权法、数据法、AI 治理等全部法律领域。本仓库 `skills/*/references/` 目录下 24 个法条全文和实务指引文件来源于此。 |
+| **本仓库引用** | `skills/*/references/`（24 个法条全文和实务文件） |
+
 ---
 
 ## 自研内容（不涉及上游）
@@ -52,7 +62,6 @@
 以下内容由本仓库自行研发：
 
 - **PRC-US 法律语义对齐框架** — 12 个领域 × 中美法律概念一对一映射 + 配套护栏文件
-- **qulv 知识库** — 22 部中国法律官方 PDF 全文
 - **中国化子技能** — 调查取证准备、证据保全与留存、司法协查响应、律师函生成（全量重写）
 - **4 路 diff-tool 参考窗口架构** — 各上游独立比对脚本
 - **MCP 连接器独立仓库** — 与技能内容解耦管理
@@ -66,5 +75,6 @@
 - anthropics/claude-for-legal → Apache 2.0
 - zhou210712/claude-for-legal-ZH → Apache 2.0
 - saysoph/solo-law-firm-agents → MIT
+- Daknniel-0881/qulv-china-legal-counsel-skill → 开源
 
 > 如本致谢遗漏了任何贡献者，请提交 Issue 告知。

@@ -1,6 +1,6 @@
 ﻿# 知识产权惩罚性赔偿司法解释
 
-> 来源: qulv-china-legal-counsel-skill 知识库 | 条文章节化
+> 来源: Daknniel-0881/qulv-china-legal-counsel-skill | 条文章节化
 > 以全国人大公布的正式法律文本为准
 
 ---

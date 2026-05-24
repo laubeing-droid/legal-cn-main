@@ -1,6 +1,6 @@
 ﻿# 互联网广告管理办法
 
-> 来源: qulv-china-legal-counsel-skill 知识库 | 条文章节化
+> 来源: Daknniel-0881/qulv-china-legal-counsel-skill | 条文章节化
 > 以全国人大公布的正式法律文本为准
 
 ---
