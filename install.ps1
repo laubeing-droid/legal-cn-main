@@ -20,7 +20,7 @@ Write-Host ''
 Write-Host '[1/3] 安装技能...' -ForegroundColor Yellow
 $domains = @('commercial-legal','privacy-legal','product-legal','corporate-legal',
     'employment-legal','regulatory-legal','ai-governance-legal','litigation-legal',
-    'law-student','legal-clinic','legal-builder-hub','ip-legal','solo-law-firm')
+    'law-student','legal-clinic','legal-builder-hub','ip-legal','solo-law-firm'  # 由下方独立段处理)
 foreach ($name in $domains) {
     $src = "$RepoRoot\skills\$name"
     $tgt = "$SkillsDir\$name"
@@ -112,7 +112,7 @@ if ($policy -eq 'Restricted') {
 
 # 验证
 $missing = @()
-$all = $domains + @('claude-legal-cn')
+$all = $domains + @('claude-legal-cn', 'solo-law-firm')
 foreach ($name in $all) {
     if (-not (Test-Path "$SkillsDir\$name\SKILL.md")) { $missing += $name }
 }
@@ -127,3 +127,6 @@ Write-Host ''
 Write-Host '安装完成！重启 Codex Desktop 使技能生效。' -ForegroundColor Green
 Write-Host 'MCP 连接器由 Codex-Claude-legal-CN-mcp-connectors 管理。' -ForegroundColor Cyan
 Write-Host '  配置指南: docs/connectors.md' -ForegroundColor Cyan
+
+
+

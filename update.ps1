@@ -18,7 +18,7 @@ $McpRepoUrl = 'https://github.com/laubeing-droid/Codex-Claude-legal-CN-mcp-conne
 $domains = @(
     'commercial-legal','privacy-legal','product-legal','corporate-legal',
     'employment-legal','regulatory-legal','ai-governance-legal','litigation-legal',
-    'law-student','legal-clinic','legal-builder-hub','ip-legal','solo-law-firm'
+    'law-student','legal-clinic','legal-builder-hub','ip-legal',
 )
 
 Write-Host '=== 更新 Codex 中国法律技能 ===' -ForegroundColor Green
@@ -74,6 +74,22 @@ $null = New-Item -ItemType Directory -Force $rootTgt
 Copy-Item "$RepoRoot\skills\claude-legal-cn\SKILL.md" "$rootTgt\SKILL.md" -Force
 Write-Host "  已同步 $count 个技能领域 + 根技能"
 
+
+# solo-law-firm 技能集（嵌套目录结构，需独立处理）
+$soloSrc = "$RepoRoot\skills\solo-law-firm"
+if (Test-Path $soloSrc) {
+    $soloDepts = Get-ChildItem -Directory $soloSrc
+    foreach ($dept in $soloDepts) {
+        $skills = Get-ChildItem -Directory $dept.FullName
+        foreach ($skill in $skills) {
+            $skillName = $skill.Name
+            $tgtDir = "$SkillsDir\solo-law-firm\$($dept.Name)\$skillName"
+            $null = New-Item -ItemType Directory -Force $tgtDir
+            Copy-Item "$($skill.FullName)\SKILL.md" "$tgtDir\SKILL.md" -Force
+        }
+    }
+    Write-Host "  solo-law-firm 技能同步完成"
+}
 # ---- [2/3] MCP 连接器检查 ----
 Write-Host '[2/3] MCP 连接器检查...' -ForegroundColor Yellow
 if (-not (Test-Path "$McpDir\verify.ps1")) {
@@ -92,7 +108,7 @@ if (Test-Path "$McpDir\verify.ps1") {
 # ---- [3/3] 验证安装完整性 ----
 Write-Host '[3/3] 验证安装完整性...' -ForegroundColor Yellow
 $missing = @()
-$all = $domains + @('claude-legal-cn')
+$all = $domains + @('claude-legal-cn', 'solo-law-firm')
 foreach ($name in $all) {
     if (-not (Test-Path "$SkillsDir\$name\SKILL.md")) { $missing += $name }
 }
@@ -105,3 +121,6 @@ if ($missing.Count -eq 0) {
 Write-Host ''
 Write-Host '更新完成。重启 Codex Desktop 使新内容生效。' -ForegroundColor Green
 Write-Host 'MCP 连接器由 Codex-Claude-legal-CN-mcp-connectors 独立管理。' -ForegroundColor Cyan
+
+
+
