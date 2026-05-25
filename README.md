@@ -20,10 +20,19 @@ status: active
 
 ## 安装
 
+**Windows:**
+
 ```powershell
 git clone https://github.com/laubeing-droid/Claude-for-Legal-CN-to-Codex.git
 cd Claude-for-Legal-CN-to-Codex
 .\install.ps1
+```
+
+**macOS / Linux:**
+```bash
+git clone https://github.com/laubeing-droid/Claude-for-Legal-CN-to-Codex.git
+cd Claude-for-Legal-CN-to-Codex
+bash install.sh
 ```
 
 重启 Codex Desktop 即可使用。
@@ -114,3 +123,38 @@ MCP 连接器由独立仓库 [Codex-Claude-legal-cn-mcp-hub](https://github.com/
 | [Codex-Legal-CN-Judgment-Predictor](https://github.com/laubeing-droid/Codex-Legal-CN-Judgment-Predictor) | AI 裁判预测框架 |
 | [PRC-US-Legal-Semantic-Alignment-Framework](https://github.com/laubeing-droid/PRC-US-Legal-Semantic-Alignment-Framework) | 自研中美概念对齐框架 |
 | [Codex-Claude-legal-cn-mcp-hub](https://github.com/laubeing-droid/Codex-Claude-legal-cn-mcp-hub) | MCP 连接器独立管理 |
+
+---
+
+## 目录结构
+
+```
+Claude-for-Legal-CN-to-Codex/
+├── .github/workflows/      # CI：法条新鲜度 / 补丁完整性 / 上游监控 / 美国法术语扫描
+├── benchmark/               # 对抗测试用例 + 修复指南
+├── docs/                    # 架构 / 中文化分析 / 评估报告 / 上游策略 / 使用指南
+├── patches/                 # 补丁层（MCP 连接器 / 护栏 / 工作流 / 参照 / 子技能 / 4 路 diff-tool）
+├── skills/                  # 12 领域技能 + 根技能 + 知识库 + 独立执业技能集
+│   ├── ai-governance-legal/ # AI 治理
+│   ├── commercial-legal/    # 商事合同
+│   ├── corporate-legal/     # 公司交易
+│   ├── employment-legal/    # 劳动用工
+│   ├── ip-legal/            # 知识产权
+│   ├── law-student/         # 法学教育
+│   ├── legal-builder-hub/   # 技能构建器
+│   ├── legal-clinic/        # 法律援助
+│   ├── litigation-legal/    # 诉讼仲裁
+│   ├── privacy-legal/       # 数据合规
+│   ├── product-legal/       # 产品合规
+│   ├── regulatory-legal/    # 监管合规
+│   ├── knowledge-base/      # 法条知识库（22 部中国法律）
+│   ├── references/          # 跨领域共用参照（护栏 / 语义树 / 司法解释）
+│   └── solo-law-firm/       # 独立执业技能集（8 科室 27 技能）
+├── install.sh / install.ps1 # 安装脚本（Windows + macOS/Linux）
+├── update.sh / update.ps1   # 更新脚本
+├── uninstall.sh / uninstall.ps1 # 卸载脚本
+├── verify.ps1               # 安装完整性验证
+├── gen-knowledge-index.ps1  # 法条知识库索引重建
+├── QUICKSTART.md            # 快速入门
+└── README.md
+```
