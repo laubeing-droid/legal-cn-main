@@ -10,8 +10,8 @@
 |:--|:---------|:---------|:---------|
 | 1 | zhou210712/claude-for-legal-ZH | diff-tool-zhou.ps1 | CLAUDE.md / MCP 配置 / 子技能 |
 | 2 | MAXXXXXLI/workbuddy-cn-legal-skills | diff-tool-max.ps1 | 14 个中国法语境文件 |
-| 3 | saysoph/solo-law-firm-agents | diff-tool-solo.ps1 | 26 个独立执业技能 |
-| 4 | Daknniel-0881/qulv-china-legal-counsel-skill | diff-tool-qulv.ps1 | 22 部中国法律 PDF |
+| 3 | saysoph/solo-law-firm-agents | diff-tool-solo.ps1（已断开，仅追踪） | 27 个独立执业技能 |
+| 4 | laubeing-droid/PRC-US-Legal-Semantic-Alignment-Framework | diff-tool-align.ps1（post-commit 自动同步） | 29 项阻断清单 + 中美概念映射 |
 
 ---
 
@@ -63,6 +63,12 @@ GitHub Actions / diff-tool 检测变更
 ### 使用方法
 
 ```powershell
+# 统一入口（推荐）
+.\patches\diff-tool-all.ps1               # 一次检查全部四个
+.\patches\diff-tool-all.ps1 -Diff         # 查看详细差异
+.\patches\diff-tool-all.ps1 -Update       # 更新全部（solo 除外）
+
+# 单独检查
 # 检查 zhou210712 是否有更新
 .\patches\diff-tool-zhou.ps1
 
@@ -93,7 +99,7 @@ GitHub Actions / diff-tool 检测变更
 
 ## 五、CI 监控
 
-`.github/workflows/upstream-monitor.yml` 每周自动运行一次比对，发现变更自动创建 Issue。
+`.github/workflows/upstream-monitor.yml` 每周自动运行一次比对（监控 anthropic、zhou、MAXXXXXLI、solo-law-firm 四个上游），发现变更自动创建 Issue。
 
 ---
 
