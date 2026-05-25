@@ -1,0 +1,54 @@
+﻿name: "月度法律断言全量验证"
+
+on:
+  schedule:
+    - cron: "0 10 1 * *"    # 每月1日 UTC 10:00（比扫描CI晚2小时）
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config user.name "law-verify-bot[bot]"
+          git config user.email "law-verify-bot[bot]@users.noreply.github.com"
+
+      - name: 全量验证
+        id: verify
+        shell: pwsh
+        run: |
+          Write-Host "=== 月度法律断言验证 ===" -ForegroundColor Cyan
+          & ./patches/law-verify.ps1 -AllRepos -AutoApply 2>&1 | Tee-Object -Variable output
+          
+          # Extract stats
+          $disc = ($output | Select-String "差异: (\d+)").Matches.Groups[1].Value
+          $updated = ($output | Select-String "更新: (\d+)").Matches.Groups[1].Value
+          
+          "discrepancies=$disc" >> $env:GITHUB_OUTPUT
+          "updated=$updated" >> $env:GITHUB_OUTPUT
+
+      - name: 提交变更
+        shell: pwsh
+        run: |
+          if (-not (git diff --name-only)) { Write-Host "无变更。"; exit 0 }
+          git add -A
+          git commit -m "ci: 月度法律断言验证自动更新 — $(Get-Date -Format 'yyyy-MM-dd')"
+          git push origin main
+
+      - name: 摘要
+        if: always()
+        run: |
+          echo "## 月度量证报告" >> $GITHUB_STEP_SUMMARY
+          echo "- 差异: ${{ steps.verify.outputs.discrepancies }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 修正: ${{ steps.verify.outputs.updated }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 详情: [law-discrepancies.md](skills/references/verify/law-discrepancies.md)" >> $GITHUB_STEP_SUMMARY
