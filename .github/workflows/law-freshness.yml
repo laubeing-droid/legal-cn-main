@@ -1,0 +1,114 @@
+﻿name: Law Freshness Check
+
+on:
+  schedule:
+    - cron: '0 2 1 * *'   # 每月1日 UTC 02:00
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  check-law-freshness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check law versions for overdue items
+        id: check
+        run: |
+          echo "Checking law-versions.json for overdue checks..."
+          
+          # Parse JSON and find laws past their next_check date
+          TODAY=$(date +%Y-%m-%d)
+          
+          python3 << 'PYEOF'
+          import json, sys
+          from datetime import date
+          
+          with open("skills/references/law-versions.json", "r", encoding="utf-8") as f:
+              data = json.load(f)
+          
+          today = date.today().isoformat()
+          overdue = []
+          upcoming_warnings = []
+          
+          for category, label in [("laws", "法律"), ("judicial_interpretations", "司法解释")]:
+              for name, info in data.get(category, {}).items():
+                  next_check = info.get("next_check", "")
+                  if next_check and next_check < today:
+                      overdue.append(f"- [{label}] **{name}** — 上次核实: {info.get('effective_date','?')}, 下次应核实: {next_check}")
+                  
+                  # Check upcoming items
+                  for u in info.get("upcoming", []):
+                      if "待纳入" in u.get("status", "") or "征求意见" in u.get("status", ""):
+                          upcoming_warnings.append(f"- [{label}] {name}: {u['description']} ({u['status']})")
+          
+          if overdue:
+              print(f"## OVERDUE_CHECK:{len(overdue)}")
+              for o in overdue:
+                  print(o)
+          else:
+              print("## OVERDUE_CHECK:0")
+          
+          if upcoming_warnings:
+              print(f"## PENDING_ITEMS:{len(upcoming_warnings)}")
+              for w in upcoming_warnings:
+                  print(w)
+          
+          print(f"## TOTAL_LAWS:{len(data.get('laws',{}))}")
+          print(f"## TOTAL_INTERPS:{len(data.get('judicial_interpretations',{}))}")
+          PYEOF
+          
+          # Extract counts for Issue creation
+          OVERDUE=$(grep "OVERDUE_CHECK:" /tmp/law_check.log 2>/dev/null | cut -d: -f2 || echo "0")
+          echo "overdue_count=$OVERDUE" >> "$GITHUB_OUTPUT"
+
+      - name: Create Issue for overdue laws
+        if: steps.check.outputs.overdue_count != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['law-freshness']
+            });
+            
+            const body = `## 法律版本核实提醒
+
+            以下法律的核实日期已过，需手动检查是否有新修订/新司法解释：
+
+            ${process.env.OVERDUE_BODY || '参见 CI 日志'}
+
+            ### 核实步骤
+            1. 访问对应法律的官方来源链接（见 law-versions.json 中 source_url 字段）
+            2. 确认是否有新修订/废止/新司法解释
+            3. 如有变更：
+               - 更新 law-versions.json 中的 amendment_history 和 effective_date
+               - 检查 affected_trees 列出的语义树条目是否需要修改
+               - 更新 next_check 为 6 个月后
+            4. 如无变更：仅更新 next_check 为 6 个月后
+
+            > 自动检查由 `.github/workflows/law-freshness.yml` 触发
+            `;
+            
+            if (issues.length > 0) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues[0].number,
+                body: body
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '法律版本核实 - ' + new Date().toISOString().slice(0, 7),
+                body: body,
+                labels: ['law-freshness']
+              });
+            }

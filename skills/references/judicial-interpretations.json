@@ -17,7 +17,8 @@
       "key_rule": "核心裁判规则",
       "practical_points": "实务要点",
       "keywords": "检索关键词"
-    }
+    },
+    "linked_to": "law-versions.json — 司法解释更新时自动标记受影响的规则"
   },
   "judicial_interpretations": {
     "民法典合同编": {

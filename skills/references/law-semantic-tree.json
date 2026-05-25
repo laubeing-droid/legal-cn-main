@@ -12,7 +12,8 @@
       "type": "norm type: validity/mandatory/permissive/prohibitive/definitional",
       "keywords": "search keywords",
       "related": "related articles"
-    }
+    },
+    "linked_to": "law-versions.json — 法律更新时自动标记受影响的法条"
   },
   "laws": {
     "民法典·合同编": {
@@ -222,7 +223,15 @@
             "情势变更"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国民法典",
+        "effective_date": "2021-01-01",
+        "current_version": "2020年5月28日第十三届全国人大三次会议通过",
+        "status": "现行有效",
+        "next_check": "2026-06-01",
+        "source_url": "https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3NTJiN2Q0YTAxNzVlNDc1NmJhNDA0NTc%3D"
+      }
     },
     "民法典·侵权编": {
       "source": "litigation-legal/references/china-tort-law-alignment.md",
@@ -308,7 +317,15 @@
             "惩罚性赔偿"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国民法典",
+        "effective_date": "2021-01-01",
+        "current_version": "2020年5月28日第十三届全国人大三次会议通过",
+        "status": "现行有效",
+        "next_check": "2026-06-01",
+        "source_url": "https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3NTJiN2Q0YTAxNzVlNDc1NmJhNDA0NTc%3D"
+      }
     },
     "公司法(2024)": {
       "source": "corporate-legal/references/company-law-2024-core.md",
@@ -384,7 +401,15 @@
             "利益冲突"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国公司法",
+        "effective_date": "2024-07-01",
+        "current_version": "2023年12月29日第十四届全国人大常委会第七次会议修订",
+        "status": "现行有效",
+        "next_check": "2026-06-01",
+        "source_url": "https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3NTJiN2Q0YTAxNzVlNDc1NmJhNDA0NTc%3D"
+      }
     },
     "劳动合同法": {
       "source": "employment-legal/references/labor-core-rules.md",
@@ -513,7 +538,15 @@
             "2N"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国劳动合同法",
+        "effective_date": "2013-07-01",
+        "current_version": "2012年12月28日第十一届全国人大常委会第三十次会议修正",
+        "status": "现行有效",
+        "next_check": "2026-06-01",
+        "source_url": "https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3NTJiN2Q0YTAxNzVlNDc1NmJhNDA0NTc%3D"
+      }
     },
     "数据安全法": {
       "source": "privacy-legal/references/data_security_law.md",
@@ -572,7 +605,15 @@
             "数据泄露"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国数据安全法",
+        "effective_date": "2021-09-01",
+        "current_version": "2021年6月10日第十三届全国人大常委会第二十九次会议通过",
+        "status": "现行有效",
+        "next_check": "2026-06-01",
+        "source_url": "https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3NTJiN2Q0YTAxNzVlNDc1NmJhNDA0NTc%3D"
+      }
     },
     "个人信息保护法": {
       "source": "privacy-legal/references/personal_information_protection_law.md",
@@ -663,7 +704,15 @@
             "高额罚款"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国个人信息保护法",
+        "effective_date": "2021-11-01",
+        "current_version": "2021年8月20日第十三届全国人大常委会第三十次会议通过",
+        "status": "现行有效",
+        "next_check": "2026-06-01",
+        "source_url": "https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3NTJiN2Q0YTAxNzVlNDc1NmJhNDA0NTc%3D"
+      }
     },
     "民事诉讼法": {
       "source": "litigation-legal/references/civil-procedure-core.md",
@@ -765,7 +814,15 @@
             "执行"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国民事诉讼法",
+        "effective_date": "2024-01-01",
+        "current_version": "2023年9月1日第十四届全国人大常委会第五次会议修正",
+        "status": "现行有效",
+        "next_check": "2026-06-01",
+        "source_url": "https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3NTJiN2Q0YTAxNzVlNDc1NmJhNDA0NTc%3D"
+      }
     },
     "反不正当竞争法": {
       "source": "regulatory-legal/references/online_anti_unfair_competition_provisions.md",
@@ -839,7 +896,15 @@
             "平台"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国反不正当竞争法",
+        "effective_date": "2019-04-23",
+        "current_version": "2019年4月23日第十三届全国人大常委会第十次会议修正",
+        "status": "现行有效",
+        "next_check": "2026-06-01",
+        "source_url": "https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3NTJiN2Q0YTAxNzVlNDc1NmJhNDA0NTc%3D"
+      }
     },
     "消费者权益保护法实施条例(2024)": {
       "source": "国务院令第778号, 2024年7月1日施行",
@@ -980,7 +1045,15 @@
             "最低500"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国消费者权益保护法实施条例",
+        "effective_date": "2024-07-01",
+        "current_version": "2024年3月15日国务院令第778号",
+        "status": "现行有效",
+        "next_check": "2026-07-01",
+        "source_url": "https://www.gov.cn/zhengce/content/202403/content_6940158.htm"
+      }
     },
     "合同行政监督管理办法(2023)": {
       "source": "国家市场监督管理总局令第77号, 2023年7月1日施行",
@@ -1104,7 +1177,15 @@
             "行政处罚"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "合同行政监督管理办法",
+        "effective_date": "2023-07-01",
+        "current_version": "2023年5月18日国家市场监督管理总局令第77号",
+        "status": "现行有效",
+        "next_check": "2026-07-01",
+        "source_url": "https://www.gov.cn/gongbao/2023/issue_10666/202307/content_6892295.htm"
+      }
     },
     "广告法": {
       "source": "中华人民共和国广告法(2021修正), product-legal/references/advertising_law.md",
@@ -1203,7 +1284,15 @@
             "处方药"
           ]
         }
-      ]
+      ],
+      "version_ref": {
+        "law": "中华人民共和国广告法",
+        "effective_date": "2021-04-29",
+        "current_version": "2021年4月29日第十三届全国人大常委会第二十八次会议修正",
+        "status": "现行有效",
+        "next_check": "2026-06-01",
+        "source_url": "https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3NTJiN2Q0YTAxNzVlNDc1NmJhNDA0NTc%3D"
+      }
     }
   }
 }
