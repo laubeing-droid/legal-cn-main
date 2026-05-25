@@ -507,7 +507,7 @@ status: active
 
 ### 4.1 要素式格式（强制）
 
-- ✅ 当事人信息必须使用表格（姓名/住所/法定代表人/统一社会信用代码/电话）—— 见 `references/element-style-pleading.md`
+- ✅ 当事人信息必须使用表格（姓名/住所/法定代表人/统一社会信用代码/电话）—— 见 `references/spc-pleading-loan.md（或其他对应案由的 spc-pleading-*.md）`
 - ✅ 诉讼请求必须逐条编号，金额精确到分，附计算公式
 - ✅ 事实与理由按时间线分段，每段 ≤5 行
 - ✅ 证据清单必须附文末（证据名称 + 证明目的二列）
@@ -535,7 +535,7 @@ status: active
 | 国家赔偿（4 类） | 改判无罪/违法拘留/错误执行/怠于履职...申请书.docx |
 | 执行申请（9 类） | 强制执行/执行异议/复议/监督/担保...申请书.docx |
 
-> 完整 67 类映射见 `references/element-style-pleading.md`
+> 完整 67 类映射见 `references/spc-pleading-loan.md（或其他对应案由的 spc-pleading-*.md）`
 > 本地模板源：`D:\同步网盘\事务所工作\日常运营\立案退费会见等\诉讼\67类起诉状、答辩状示范文本\`
 
 ### 4.3 各子技能文书输出约束
@@ -548,7 +548,7 @@ status: active
 | chronology | 时间线 | 列表格式，每事件 ≤3 行 |
 | claim-chart | 请求/抗辩要素表 | 表格格式 |
 
-> 文书生成前，先查 `element-style-pleading.md` 确认本案是否有对应最高法范本。如有，必须参照范本格式。
+> 文书生成前，先查 `spc-pleading-loan.md（或其他对应案由的 spc-pleading-*.md）` 确认本案是否有对应最高法范本。如有，必须参照范本格式。
 
 
 ## 种子文件
