@@ -4,6 +4,11 @@ module: litigation-legal
 status: active
 -->
 
+
+> **引用依据**：《中华人民共和国刑事诉讼法》（2018修正）+ 《最高人民法院关于适用〈中华人民共和国刑事诉讼法〉的解释》（法释〔2021〕1号，2021年3月1日施行，655条/27章）
+> 全文结构索引 → `skills/references/law-full/criminal-procedure-law-interpretation.json`
+
+
 > 来源: laubeing-droid/PRC-US-Legal-Semantic-Alignment-Framework
 > 许可: Apache 2.0
 
