@@ -33,6 +33,24 @@
 ## [1.4.0-1.0.0] - 2026-05-23
 - MCP 闆嗘垚銆佹灦鏋勬暣鏀广€佹枃妗ｄ綋绯绘惌寤恒€佸垵濮嬪彂甯?
 
+## [2.8.1] - 2026-05-25
+### Rule Runtime
+- claude-legal-cn/SKILL.md new section: Rule Runtime (mandatory enforcement)
+- Reasoning chain lock: force-load reasoning-template-zh.md, ban IRAC
+- Blocking filter: scan 29-concept blocklist before every output
+- Output self-check: append [Rule Runtime self-check] fold; all green before finish
+
+### Tools
+- New gen-knowledge-index.ps1: auto-scan skills/*/references/ and regenerate MAPPING.md
+- New patches/diff-tool-all.ps1: unified check of all 4 upstreams
+
+### Docs
+- Update docs/UPSTREAM_DIFF_POLICY.md: remove non-existent qulv, add self-dev framework, mark solo disconnected
+- Sync upstream-monitor.yml descriptions
+
+### Fixes
+- MAPPING.md: add 3 missing laws (Civil Code, Personal Info Export Contract, AI Content Label)
+- Blocking list count unified to 29
 ## [2.8.0] - 2026-05-25
 ### 架构变更
 - 断开 zhou210712 上游依赖，改为本地部署+参考窗口模式
