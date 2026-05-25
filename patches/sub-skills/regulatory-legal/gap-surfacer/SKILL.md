@@ -7,7 +7,7 @@ description: >
   并通过企业通讯工具通知差距负责人，每次发送前需确认。
   由 gaps 和 comments 技能在实质工作前加载。
 user-invocable: false
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

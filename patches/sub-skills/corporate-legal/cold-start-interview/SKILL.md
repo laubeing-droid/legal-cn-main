@@ -7,7 +7,7 @@ description: >
   仅将相关章节写入插件配置。在全新安装时、CLAUDE.md 仍有 [PLACEHOLDER]
   标记时、开始新交易时、或重新检查集成或刷新某一模块时使用。
 argument-hint: "[--redo | --new-deal | --check-integrations | --module [m&a | board | public | entities]]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

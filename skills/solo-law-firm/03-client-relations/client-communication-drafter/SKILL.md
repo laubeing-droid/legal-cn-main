@@ -8,7 +8,7 @@ metadata:
   department: 03-client-relations
   original-name: "客户沟通起草"
   merged-from: "案件进展通报"
-version: 2.9.0
+version: 2.10.0
 module: solo-law-firm
 status: active
 ---

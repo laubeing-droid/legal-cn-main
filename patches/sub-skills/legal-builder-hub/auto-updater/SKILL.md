@@ -5,7 +5,7 @@ description: >
   当用户说"检查更新""更新我的技能""已安装技能有什么更新"或从
   registry-sync agent 调用时使用。
 argument-hint: "[--apply 更新全部，否则仅通知]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

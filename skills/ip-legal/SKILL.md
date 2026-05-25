@@ -1,7 +1,7 @@
 ﻿---
 name: ip-legal
 description: 商标检索、专利分析、著作权保护、开源合规审查
-version: 2.9.0
+version: 2.10.0
 module: ip-legal
 status: active
 triggers: 知产, 商标, 专利, 著作权, 商业秘密

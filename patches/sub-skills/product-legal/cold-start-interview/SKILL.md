@@ -5,7 +5,7 @@ description: >
   在全新安装、产品法务入职或插件配置含有占位符时使用。运行 --redo 重新访谈，
   或 --check-integrations 仅重新检测连接器。
 argument-hint: "[--redo] [--check-integrations 仅重新检测集成]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

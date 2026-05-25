@@ -5,7 +5,7 @@ description: >
   组织结构、分析深度、清晰度、引注格式。绝不代写重写。当用户说"给我的备忘录
   提反馈""读一下我的草稿""批评我的代理词"时使用。
 argument-hint: "[粘贴草稿 或 文件路径]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

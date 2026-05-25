@@ -5,7 +5,7 @@ description: >
   仅在冷启动设置时选择"正式审查队列"指导风格时活跃；否则休眠。
   当指导老师想查看等待审查的内容、批准、编辑后批准或退回某项时使用。
 argument-hint: "[--approve ID | --return ID '备注' | --edit ID]"
-version: 2.9.0
+version: 2.10.0
 module: legal-clinic
 status: active
 ---

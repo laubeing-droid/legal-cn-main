@@ -6,7 +6,7 @@ description: >
   structured outside-counsel briefing requests, and a persistent gap tracker.
   Loaded by /expansion-kickoff and /expansion-update; not invoked directly.
 user-invocable: false
-version: 2.9.0
+version: 2.10.0
 module: employment-legal
 status: active
 ---

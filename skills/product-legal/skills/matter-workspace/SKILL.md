@@ -5,7 +5,7 @@ description: >
   当您为多个客户或事项工作、需要创建、列出、切换、关闭或脱钩活跃事项
   以防一个委托事项的上下文泄漏到另一个时使用。
 argument-hint: "<new | list | switch | close | none> [事项简称]"
-version: 2.9.0
+version: 2.10.0
 module: product-legal
 status: active
 ---

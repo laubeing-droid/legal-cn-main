@@ -5,7 +5,7 @@ description: >
   每案一份 markdown。当用户要求向外聘律师发状态请求、
   每周外聘律师检查或需要从案件组合日志中起草各案状态邮件时使用。
 argument-hint: "[--all | --slug=foo | --no-gmail]"
-version: 2.9.0
+version: 2.10.0
 module: litigation-legal
 status: active
 ---

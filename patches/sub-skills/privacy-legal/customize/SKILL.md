@@ -8,7 +8,7 @@ description: >
   "change my [thing]", "update my profile", "edit my playbook", or
   "customize".
 argument-hint: "[section name, or describe what you want to change]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

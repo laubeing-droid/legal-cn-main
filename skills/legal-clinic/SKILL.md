@@ -1,7 +1,7 @@
 ﻿---
 name: legal-clinic
 description: 法律援助接谈、客户信函、法律备忘录、检索路线图
-version: 2.9.0
+version: 2.10.0
 module: legal-clinic
 status: active
 triggers: 法律援助, 公益, 法律咨询

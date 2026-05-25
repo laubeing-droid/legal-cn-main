@@ -6,7 +6,7 @@ description: >
   构建大事记或时间线，说"从材料中提取时间线"或"什么发生了什么时间"，
   或需要工作大事记、事实陈述或证人特定时间线时使用。
 argument-hint: "[slug] [--format=working|sof|witness-[name]]"
-version: 2.9.0
+version: 2.10.0
 module: litigation-legal
 status: active
 ---

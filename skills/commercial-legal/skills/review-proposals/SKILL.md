@@ -5,7 +5,7 @@ description: >
   应用到业务领域配置中。当审查指引监控代理提出建议时使用，或当用户说
   "审查审查指引建议""有哪些待处理的审查指引更新"或想逐一处理偏离驱动的审查指引变更时使用。
 argument-hint: "[无需参数——从待处理建议文件工作]"
-version: 2.9.0
+version: 2.10.0
 module: commercial-legal
 status: active
 ---

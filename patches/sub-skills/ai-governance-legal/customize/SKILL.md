@@ -7,7 +7,7 @@ description: >
   "添加一条新的红线"、"更新算法备案到期提醒"、
   或任何细微调整场景。不覆盖已配置的所有内容——仅编辑指定字段。
 argument-hint: "[需要更改的内容描述]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

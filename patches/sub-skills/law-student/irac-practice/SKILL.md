@@ -5,7 +5,7 @@ description: >
   论文或展示范文；追踪跨练习的模式。当用户说"批改我的 IRAC""检查我的论文"
   或"我写了这个，给我反馈"时使用。
 argument-hint: "[粘贴论文 或 草稿路径 或 --generate-hypo]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

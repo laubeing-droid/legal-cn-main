@@ -6,7 +6,7 @@ description: >
   当指导律师需要撰写或修订按实践领域的指南、调整诊所技能在其诊所类型
   下的行为或将其教学理念设定为插件配置时使用。
 argument-hint: "[可选：实践领域 — 如 '劳动争议', '婚姻家庭']"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

@@ -5,7 +5,7 @@ description: >
   与其他所有客户或委托分开，适用于多客户执业者。当用户想打开新事项、切换事项、列出事项、
   关闭/归档事项或仅在实践级工作时使用。
 argument-hint: "<new | list | switch | close | none> [代号]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

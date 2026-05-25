@@ -5,7 +5,7 @@ description: >
   过往大纲、有反馈的批改论文、历年考题、法考真题集、教学大纲、已撰写论文。
   在新安装、用户说"设置"或"开始"时使用，或使用 --check-integrations 重新探测连接器。
 argument-hint: "[--redo] [--check-integrations]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

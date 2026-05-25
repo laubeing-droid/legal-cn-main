@@ -7,7 +7,7 @@ metadata:
   version: "1.0.0"
   department: 06-finance-admin
   original-name: "利润核算师"
-version: 2.9.0
+version: 2.10.0
 module: solo-law-firm
 status: active
 ---

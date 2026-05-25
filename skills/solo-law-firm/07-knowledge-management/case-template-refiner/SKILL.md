@@ -7,7 +7,7 @@ metadata:
   version: "1.0.0"
   department: 07-knowledge-management
   original-name: "案例与模板重塑"
-version: 2.9.0
+version: 2.10.0
 module: solo-law-firm
 status: active
 ---

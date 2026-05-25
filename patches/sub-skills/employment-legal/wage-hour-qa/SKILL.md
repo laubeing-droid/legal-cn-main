@@ -7,7 +7,7 @@ description: >
   或说"[某地]的规则是什么"、"这个岗位是否适用不定时工作制"、
   "我们需要支付加班费吗"或"可以把这个岗位归类为"时使用。
 argument-hint: "[问题]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

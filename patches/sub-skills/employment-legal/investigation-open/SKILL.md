@@ -5,7 +5,7 @@ description: >
   并创建持续调查日志。当收到投诉或指控，且律师需要建立一个
   受保密保护的调查工作空间时使用。
 argument-hint: "[指控的简要描述]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

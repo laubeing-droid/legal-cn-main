@@ -5,7 +5,7 @@ description: >
   存在哪些证据缺口、每个问题上最有证明力的证据是什么。
   当律师需要查询调查记录而不重新阅读每个条目时使用。
 argument-hint: "[调查事项名称] [问题]"
-version: 2.9.0
+version: 2.10.0
 module: employment-legal
 status: active
 ---

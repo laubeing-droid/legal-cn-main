@@ -5,7 +5,7 @@ description: >
   询问你是什么类型的律师并推荐首先安装什么。在新安装、用户说"帮我开始"或
   "我应该安装什么"时使用，或在添加或移除 MCP 连接器后重新运行集成可用性检查。
 argument-hint: "[--redo] [--check-integrations]"
-version: 2.9.0
+version: 2.10.0
 module: legal-builder-hub
 status: active
 ---

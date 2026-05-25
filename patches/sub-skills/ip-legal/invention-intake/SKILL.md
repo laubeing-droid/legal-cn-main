@@ -5,7 +5,7 @@ description: >
   可检测性及战略价值。用于收到发明披露、需要判断是否值得进行
   现有技术检索和专利律师审查、进一步调查或驳回时。
 argument-hint: "[粘贴或描述发明披露 — 或仅提供名称，由我询问]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

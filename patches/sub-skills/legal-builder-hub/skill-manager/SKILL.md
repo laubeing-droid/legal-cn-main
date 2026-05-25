@@ -5,7 +5,7 @@ description: >
   默认安全——拒绝触碰第一方插件技能，删除文件前确认，记录每次操作。
   由 /legal-builder-hub:uninstall 和 /legal-builder-hub:disable 技能加载。
 user-invocable: false
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

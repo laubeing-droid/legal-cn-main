@@ -5,7 +5,7 @@ description: >
   适用于团队从未有过AI使用政策、需要快速生成初稿供法律审阅、
   或现有政策需要根据新法规全面重写时。
 argument-hint: "[面向的受众 — 内部员工 / 外部客户 / 两者皆需]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

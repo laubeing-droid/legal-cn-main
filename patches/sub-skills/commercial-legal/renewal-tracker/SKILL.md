@@ -6,7 +6,7 @@ description: >
   "我们是否错过了取消窗口""将此添加到续约追踪器"时使用，或按计划运行。
   接收来自 saas-msa-review 的交接数据。
 argument-hint: "[--days N 变更窗口 | --missed 查看已过期的窗口]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

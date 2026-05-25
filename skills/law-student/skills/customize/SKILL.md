@@ -5,7 +5,7 @@ description: >
   调整当前课程、学习风格、大纲偏好、法考备考科目、种子材料或学习节奏。
   当用户说"修改我的[某项]""添加课程""更新我的画像""新学期""自定义"时使用。
 argument-hint: "[配置章节名称, 或描述你想修改的内容]"
-version: 2.9.0
+version: 2.10.0
 module: law-student
 status: active
 ---

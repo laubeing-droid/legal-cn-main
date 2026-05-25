@@ -6,7 +6,7 @@ description: >
   动态源配置或事务工作区路径。适用于用户说"改我的[某配置]"、"增加一个监管机构"、
   "更新我的监测清单"、"编辑阈值"或"定制"时。
 argument-hint: "[配置节名称，或描述你要变更的内容]"
-version: 2.9.0
+version: 2.10.0
 module: regulatory-legal
 status: active
 ---

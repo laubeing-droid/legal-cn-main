@@ -5,7 +5,7 @@ description: >
   路由至正确的审查技能，并将输出整合为单一备忘录。当用户说"审查这个合同"
   "检查这个主协议""这个保密协议可以吗""看看这个SaaS协议"或附上接收方协议供审查时使用。
 argument-hint: '[文件路径 | 云文档链接 | 合同管理系统ID | 粘贴文本]'
-version: 2.9.0
+version: 2.10.0
 module: commercial-legal
 status: active
 ---

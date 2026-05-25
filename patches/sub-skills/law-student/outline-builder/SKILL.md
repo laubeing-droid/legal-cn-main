@@ -5,7 +5,7 @@ description: >
   写大纲。当用户说"大纲[科目]""添加到我的大纲""从[材料]构建大纲"
   或指向课堂材料时使用。
 argument-hint: "[科目, 或指向课堂笔记/教材章节]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

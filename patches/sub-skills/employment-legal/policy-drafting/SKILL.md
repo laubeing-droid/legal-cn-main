@@ -5,7 +5,7 @@ description: >
   生成地方版本。当用户说"起草一份[主题]制度"、"我们需要关于[主题]的规定"、
   "更新我们的[主题]制度"或指出制度空白时使用。
 argument-hint: "[制度主题——如'远程办公'、'考勤管理'、'绩效考核']"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

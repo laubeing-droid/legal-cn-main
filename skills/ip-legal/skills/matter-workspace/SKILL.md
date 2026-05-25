@@ -5,7 +5,7 @@ description: >
   为多客户执业者保持一个客户或委托的上下文与其他客户隔绝。
   用于用户想要开启新事项、切换事项、列出事项、关闭/归档事项或仅在实务级工作时。
 argument-hint: "<new | list | switch | close | none> [slug]"
-version: 2.9.0
+version: 2.10.0
 module: ip-legal
 status: active
 ---

@@ -5,7 +5,7 @@ description: >
   当用户说"谁需要批准这个""上报这个""这个需要法务负责人签字吗"
   "路由这个去审批"或当其他技能发现超出审查者权限的问题时使用。
 argument-hint: "[描述问题，或引用审查备忘录]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

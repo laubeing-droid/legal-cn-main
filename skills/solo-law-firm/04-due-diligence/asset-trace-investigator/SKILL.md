@@ -7,7 +7,7 @@ metadata:
   version: "1.0.0"
   department: 04-due-diligence
   original-name: "资产线索追踪"
-version: 2.9.0
+version: 2.10.0
 module: solo-law-firm
 status: active
 ---

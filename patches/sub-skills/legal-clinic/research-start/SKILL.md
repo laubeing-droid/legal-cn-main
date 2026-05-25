@@ -6,7 +6,7 @@ description: >
   发展所有内容。当学生询问从哪里开始检索、需要某个问题的检索路线图、
   或需要识别已有检索中的缺口时使用。
 argument-hint: "[法律问题]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

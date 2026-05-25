@@ -5,7 +5,7 @@ description: >
   每个案例经核实，每个论点绑定理论。当用户说"起草[章节]"、
   "写事实部分"、"关于[问题]的代理意见"或需要法律文书章节初稿时使用。
 argument-hint: "[章节——如'事实与理由'、'代理意见'、'上诉请求']"
-version: 2.9.0
+version: 2.10.0
 module: litigation-legal
 status: active
 ---

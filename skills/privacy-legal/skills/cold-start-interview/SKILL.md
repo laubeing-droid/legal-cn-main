@@ -5,7 +5,7 @@ description: >
   CLAUDE.md。在首次运行、CLAUDE.md缺失或有占位符、或用户说"设置隐私插件"
   "引导我""配置隐私""，或想重新运行访谈或重新检查集成时使用。
 argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集成]"
-version: 2.9.0
+version: 2.10.0
 module: privacy-legal
 status: active
 ---

@@ -5,7 +5,7 @@ description: >
   适用于多客户私人执业场景，将一个客户或委托的上下文与另一个
   隔离开。也可以在实质技能需要知道它在哪个事务中工作时使用。
 argument-hint: "<new | list | switch | close | none> [slug]"
-version: 2.9.0
+version: 2.10.0
 module: ai-governance-legal
 status: active
 ---

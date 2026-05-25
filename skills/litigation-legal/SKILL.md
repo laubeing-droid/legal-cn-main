@@ -1,7 +1,7 @@
 ﻿---
 name: litigation-legal
 description: 案件管理、证据三性审查、诉讼文书起草、保全和管辖分析
-version: 2.9.0
+version: 2.10.0
 module: litigation-legal
 status: active
 triggers: 打官司, 诉讼, 仲裁, 起诉, 写律师函, 写起诉状, 证据

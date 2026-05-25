@@ -5,7 +5,7 @@ description: >
   标记任何逾期的项目，浮现下一优先级。当自上次会话以来已有工作进展，
   且扩张追踪文件需要反映当前状态时使用。
 argument-hint: "[省/直辖市/地域名称]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

@@ -6,7 +6,7 @@ description: >
   当用户说"更改我的[某内容]""添加注册表""更新我的画像""编辑我的配置"
   或"定制"时使用。
 argument-hint: "[节名称，或描述你想更改的内容]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

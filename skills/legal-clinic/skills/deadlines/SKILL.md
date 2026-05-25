@@ -6,7 +6,7 @@ description: >
   诊所工作量的运营记录。当学生或指导老师需要添加截止日期、查询本周
   到期事项、获取截止日期报告或更新案件截止日期时使用。
 argument-hint: "[--add | --report (默认) | --update [id] | --complete [id] | --close [id] | --horizon=N]"
-version: 2.9.0
+version: 2.10.0
 module: legal-clinic
 status: active
 ---

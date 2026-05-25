@@ -7,7 +7,7 @@ metadata:
   version: "1.0.0"
   department: 08-risk-compliance
   original-name: "利冲检索器"
-version: 2.9.0
+version: 2.10.0
 module: solo-law-firm
 status: active
 ---

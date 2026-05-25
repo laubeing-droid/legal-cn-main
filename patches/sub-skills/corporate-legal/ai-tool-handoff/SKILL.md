@@ -5,7 +5,7 @@ description: >
   交接给工具，并按 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 中的
   信任层级对其输出进行 QA。当用户说"交给AI工具""批量审查""AI提取"或
   diligence-issue-extraction 遇到大批量类别时使用。
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

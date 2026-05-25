@@ -5,7 +5,7 @@ description: >
   当用户需要创建新案件工作空间、切换活跃案件、列出案件、归档案件或
   仅在实务级工作而不关联特定案件时使用。
 argument-hint: "<new | list | switch | close | none> [代号]"
-version: 2.9.0
+version: 2.10.0
 module: litigation-legal
 status: active
 ---

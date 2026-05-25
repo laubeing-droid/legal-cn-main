@@ -6,7 +6,7 @@ description: >
   绝不泄露到另一个。当多客户执业者说"新案件"、"切换案件"、
   "列出我的案件"、"关闭此案件"或需要管理哪个案件活跃时使用。
 argument-hint: "<new | list | switch | close | none> [slug]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

@@ -1,7 +1,7 @@
 ﻿---
 name: corporate-legal
 description: 公司治理、并购尽调、股权交易、决议文件起草
-version: 2.9.0
+version: 2.10.0
 module: corporate-legal
 status: active
 triggers: 尽调, 公司交易, 并购, 股权, 章程

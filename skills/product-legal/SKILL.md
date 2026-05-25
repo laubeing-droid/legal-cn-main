@@ -1,7 +1,7 @@
 ﻿---
 name: product-legal
 description: 产品上线审查、功能风险评估、广告宣传审查
-version: 2.9.0
+version: 2.10.0
 module: product-legal
 status: active
 triggers: 产品合规, 上线审查, 用户协议, 隐私政策

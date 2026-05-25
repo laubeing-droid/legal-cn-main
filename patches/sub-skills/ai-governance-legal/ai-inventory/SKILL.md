@@ -6,7 +6,7 @@ description: >
   的义务要求。适用于建立AI系统清单、进行年度AI审计、或新法
   规要求重新分类时。
 argument-hint: "[系统名称或'--full'进行全量审查]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

@@ -5,7 +5,7 @@ description: >
   更新案件日志中的保全字段，并排期下次更新。当用户说
   "发出证据保全通知"、"更新保全通知"、"解除保全"或要求全案组合证据保全状态报告时使用。
 argument-hint: "[slug] [--issue | --refresh | --release | --status]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

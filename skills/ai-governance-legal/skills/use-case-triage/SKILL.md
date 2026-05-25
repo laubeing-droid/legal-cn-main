@@ -6,7 +6,7 @@ description: >
   适用于收到新的AI用例提案、产品团队询问"这个AI功能可以上线吗"、
   或需要运行AI用例审批委员会流程时。
 argument-hint: "[描述提议的AI用例或功能]"
-version: 2.9.0
+version: 2.10.0
 module: ai-governance-legal
 status: active
 ---

@@ -8,7 +8,7 @@ metadata:
   department: 01-case-practice
   original-name: "证据分析师"
   merged-from: "证据材料管理员"
-version: 2.9.0
+version: 2.10.0
 module: solo-law-firm
 status: active
 ---

@@ -4,7 +4,7 @@ description: >
   参考：已弃用——常规信函请使用 `/client-letter`，实质性更新请使用
   `/status client`。在 v2 重构中拆分为两个更聚焦的技能。保留为重定向以支持迁移。
 user-invocable: false
-version: 2.9.0
+version: 2.10.0
 module: legal-clinic
 status: active
 ---

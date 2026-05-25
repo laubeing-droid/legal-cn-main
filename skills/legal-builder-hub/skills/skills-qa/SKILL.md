@@ -7,7 +7,7 @@ description: >
   或当用户问"我该信任这个吗？"或"这个技能设计得好吗？"时使用。
   作为 /legal-builder-hub:skill-installer 的一部分自动运行。
 argument-hint: "[技能路径 | SKILL.md 路径 | 粘贴内容]"
-version: 2.9.0
+version: 2.10.0
 module: legal-builder-hub
 status: active
 ---

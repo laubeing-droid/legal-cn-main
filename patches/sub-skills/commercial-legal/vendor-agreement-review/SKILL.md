@@ -5,7 +5,7 @@ description: >
   修订语言并路由至合适的审批人。当 /commercial-legal:review 检测到供应商主协议、
   服务协议或类似协议时加载。
 user-invocable: false
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

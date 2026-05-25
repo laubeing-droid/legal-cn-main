@@ -6,7 +6,7 @@ description: >
   AI模型授权、AI API服务条款，或采购团队提出"这个AI供应商
   合同有问题吗"时使用。
 argument-hint: "[粘贴AI供应商合同条款]"
-version: 2.9.0
+version: 2.10.0
 module: ai-governance-legal
 status: active
 ---

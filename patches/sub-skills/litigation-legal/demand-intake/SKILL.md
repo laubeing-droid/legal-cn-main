@@ -6,7 +6,7 @@ description: >
   律师函起草技能读取。当用户想准备律师函、在起草前进行委托登记，
   或获取付款催告、违约/催告整改、停止侵权等律师函的背景时使用。
 argument-hint: "[标题] [--full]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

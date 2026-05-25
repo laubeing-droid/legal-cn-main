@@ -5,7 +5,7 @@ description: >
   协议清单格式排版。当用户说"建合同清单""披露清单""清单 3.X"
   "重大合同列表"或起草披露清单时使用。
 argument-hint: "[股权收购协议路径，或粘贴重大合同定义]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

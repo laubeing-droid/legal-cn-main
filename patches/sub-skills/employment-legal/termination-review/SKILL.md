@@ -6,7 +6,7 @@ description: >
   在每次审查时研究提取，不预先存储。当用户提出"审查这个解除"、"能解除这个人吗"、
   "解除审查"或描述解除场景时使用。
 argument-hint: "[描述解除情形，或附解除相关文件]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

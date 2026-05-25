@@ -5,7 +5,7 @@ description: >
   并记录每次操作。当用户想完全移除某个社区技能（"卸载[技能]"、
   "移除这个技能"）而非仅禁用它时使用。
 argument-hint: "[技能名称]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

@@ -5,7 +5,7 @@ description: >
   捕获新进展、状态变化、风险重评估、期限变更和和解授权变更。
   当用户需要记录案件更新、标注进展或对案件组合记录状态变更时使用。
 argument-hint: "[代号] [简要事件描述]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

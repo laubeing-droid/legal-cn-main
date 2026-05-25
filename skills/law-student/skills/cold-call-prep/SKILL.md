@@ -5,7 +5,7 @@ description: >
   环节以便课前重温。当用户说"准备明天的课""课堂提问[案例]""[老师]可能在
   [案例]上问什么"或指向指定阅读材料时使用。
 argument-hint: "[案例名称, 或粘贴案例文本, 或阅读材料路径]"
-version: 2.9.0
+version: 2.10.0
 module: law-student
 status: active
 ---

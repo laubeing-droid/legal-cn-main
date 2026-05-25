@@ -1,7 +1,7 @@
 ﻿---
 name: law-student
 description: 法考备考、案例分析、法律写作与学术检索
-version: 2.9.0
+version: 2.10.0
 module: law-student
 status: active
 triggers: 学法, 法考, 案例研习, 法条学习

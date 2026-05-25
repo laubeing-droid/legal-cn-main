@@ -5,7 +5,7 @@ description: >
   使离届群体将工作干净地移交给新群体。读取截止日期、当事人沟通和案件历史。
   当指导老师或离届学生需要结束学期、构建移交备忘录或协助毕业/退出学生离任时使用。
 argument-hint: "[--semester=YYYY-学期（默认：当前）] [--case=[案件编号]（针对单个案件）]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

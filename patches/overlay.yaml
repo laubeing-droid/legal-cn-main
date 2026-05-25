@@ -1,10 +1,10 @@
-# Claude-for-Legal-CN-to-Codex — 修改声明（Overlay）
+﻿# Claude-for-Legal-CN-to-Codex — 修改声明（Overlay）
 # 最后更新: 2026-05-25
 # 格式: +新增 ~修改 -删除
 
 meta:
   name: Claude-for-Legal-CN-to-Codex
-  version: 2.8.0
+  version: 2.10.0
   repo: https://github.com/laubeing-droid/Claude-for-Legal-CN-to-Codex
   primary_upstream: zhou210712/claude-for-legal-ZH
   upstream_root: anthropics/claude-for-legal

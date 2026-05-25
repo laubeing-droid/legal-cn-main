@@ -5,7 +5,7 @@ description: >
   输出 .docx，附发送后检查清单，并提供创建案件的选项。当用户说
   "起草律师函"、"写[类型]函"或已完成委托登记准备转为可发送草案时使用。
 argument-hint: "[slug] [--skip-gate] [--version=N]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

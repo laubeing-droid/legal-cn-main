@@ -6,7 +6,7 @@ description: >
   与 /client-letter 和 /status client 协同使用。
   当需要记录通话或当事人邮件、查阅沟通日志或询问"我们上次告诉[当事人]什么"时使用。
 argument-hint: "[案件编号] [--add（默认）| --read | --summary | --patterns]"
-version: 2.9.0
+version: 2.10.0
 module: legal-clinic
 status: active
 ---

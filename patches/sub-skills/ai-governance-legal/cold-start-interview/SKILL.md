@@ -5,7 +5,7 @@ description: >
   AI系统清单、红线、审批工作流和输出偏好。
   在插件首次安装时自动运行。使用 --redo 可重新运行。
 argument-hint: "[--redo]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

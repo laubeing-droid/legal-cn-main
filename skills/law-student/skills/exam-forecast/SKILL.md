@@ -5,7 +5,7 @@ description: >
   偏好的案例假设类型、政策vs法条分析的比例——并预测今年考试可能的重点。
   当用户说"考试考什么""分析历年考题""预测考试"或分享历年考题时使用。
 argument-hint: "[课程名称, 附历年考题或文件路径]"
-version: 2.9.0
+version: 2.10.0
 module: law-student
 status: active
 ---

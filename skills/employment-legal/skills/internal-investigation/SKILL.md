@@ -8,7 +8,7 @@ description: >
   /investigation-query, /investigation-memo, and /investigation-summary; not
   invoked directly.
 user-invocable: false
-version: 2.9.0
+version: 2.10.0
 module: employment-legal
 status: active
 ---

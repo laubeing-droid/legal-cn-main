@@ -5,7 +5,7 @@ description: >
   按身份差异化输出（普通人/法学生/律师/法官/企业法务）。当用户要求查法条、判合法性、
   找赔偿标准、问法律依据、或说"根据什么法律"时触发。
 argument-hint: "[检索问题]"
-version: 2.9.0
+version: 2.10.0
 module: litigation-legal
 status: active
 ---

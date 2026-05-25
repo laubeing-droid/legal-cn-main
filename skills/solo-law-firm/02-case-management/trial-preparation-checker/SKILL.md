@@ -7,7 +7,7 @@ metadata:
   version: "1.0.0"
   department: 02-case-management
   original-name: "庭审准备清单员"
-version: 2.9.0
+version: 2.10.0
 module: solo-law-firm
 status: active
 ---

@@ -5,7 +5,7 @@ description: >
   真正需要审查的协议。面向销售和BD人员，在联系法务前自助筛查。当 /commercial-legal:review
   检测到保密协议时自动加载。
 user-invocable: false
-version: 2.9.0
+version: 2.10.0
 module: commercial-legal
 status: active
 ---

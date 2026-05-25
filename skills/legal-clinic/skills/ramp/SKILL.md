@@ -6,7 +6,7 @@ description: >
   当新诊所学生说"帮我导入""我是诊所新人""开始"，或每学期开始时使用；
   传入 --card 获取一页参考卡。
 argument-hint: "[--card 生成一页参考卡]"
-version: 2.9.0
+version: 2.10.0
 module: legal-clinic
 status: active
 ---

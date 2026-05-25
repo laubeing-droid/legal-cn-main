@@ -5,7 +5,7 @@ description: >
   价格调整、数据可迁移性、运行时间SLA以及再处理者权利。当 /commercial-legal:review
   检测到SaaS或订阅协议时加载。
 user-invocable: false
-version: 2.9.0
+version: 2.10.0
 module: commercial-legal
 status: active
 ---

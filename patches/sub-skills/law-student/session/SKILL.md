@@ -5,7 +5,7 @@ description: >
   追踪表现并更新学习计划。当用户说"给我出10道[科目]题""做一场[科目]练习"
   "做5张[科目]卡片"或想练习固定数量的题目并让计划随之调整时使用。
 argument-hint: "<科目> <n> [--客观题 | --主观题 | --记忆卡片]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---

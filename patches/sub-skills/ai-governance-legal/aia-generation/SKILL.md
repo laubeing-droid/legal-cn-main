@@ -6,7 +6,7 @@ description: >
   产品或工程团队提出"我们需要做AI影响评估"时使用，或定期重新
   认证已部署系统时使用。采用快速/全面双轨制。
 argument-hint: "[系统名称或AI用例描述]"
-version: 2.9.0
+version: 2.10.0
 module: patches
 status: active
 ---
