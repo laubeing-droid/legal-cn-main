@@ -247,3 +247,191 @@ if (Test-Path $envCheck) {
 [X] [Pkg] pydantic v1 detected! v2 API incompatible
      fix: pip uninstall pydantic -y; pip install 'pydantic>=2.0.0'
 ```
+
+---
+
+## 八、提交规范（Conventional Commits）
+
+### 8.1 格式
+
+```
+<type>(<scope>): <description>
+
+[optional body]
+```
+
+### 8.2 Type 定义
+
+| Type | 用途 | 示例 |
+|:-----|:-----|:-----|
+| `feat` | 新功能/新技能 | `feat(mcp-hub): add Trae MCP config support` |
+| `fix` | Bug 修复 | `fix(env-check): pydantic v1 detection false negative` |
+| `docs` | 文档变更 | `docs: update PLATFORM_SPEC.md with Trae path` |
+| `chore` | 构建/工具/依赖 | `chore: bump mcp from 1.0.0 to 1.1.0` |
+| `refactor` | 重构（无功能变更） | `refactor(detect): extract platform enum` |
+| `test` | 测试 | `test: add pydantic v1/v2 compatibility test` |
+| `perf` | 性能优化 | `perf(server): reduce httpx timeout` |
+| `security` | 安全修复 | `security: sanitize API key in logs` |
+
+### 8.3 Scope 定义
+
+| Scope | 含义 |
+|:-----|:-----|
+| `mcp-hub` | MCP 连接器中心 |
+| `cn-main` | 法律技能主仓库 |
+| `jdp` | 裁判预测 |
+| `aln` | 中美法律对齐 |
+| `codices` | 法律数据库 |
+| `env-check` | 环境校验 |
+| `platforms` | 平台适配框架 |
+
+---
+
+## 九、版本管理（Semantic Versioning）
+
+### 9.1 规则
+
+```
+MAJOR.MINOR.PATCH
+  │     │     └─ 修复：Bug fix，不改变 API
+  │     └─────── 新增：向后兼容的新功能
+  └───────────── 破坏性：不兼容的 API 变更
+```
+
+### 9.2 触发条件
+
+| 变更 | 版本 | 要求 |
+|:-----|:--|:-----|
+| 新增技能/连接器 | MINOR++ | CHANGELOG 条目 |
+| 修复 Bug | PATCH++ | CHANGELOG 条目 |
+| 删除/重命名 API | MAJOR++ | CHANGELOG + 迁移指南 |
+| 平台支持变更 | MINOR++ | PLATFORM_SPEC.md 同步更新 |
+| 新增依赖 | MINOR++ | requirements.txt + env-check 同步 |
+
+### 9.3 版本同步
+
+所有五个仓库的版本号**独立管理**，但在 ECOSYSTEM.md 中记录对照表。
+
+---
+
+## 十、安全准则（强制）
+
+### 10.1 凭证管理
+
+```
+❌ 禁止：API Key / Token / 密码 硬编码在代码中
+❌ 禁止：.env 文件提交到 Git
+✅ 必须：使用环境变量或 .env.example 模板
+✅ 必须：日志/错误信息中脱敏凭证
+```
+
+### 10.2 .gitignore 最小要求
+
+```gitignore
+.env
+*.key
+*.pem
+*.token
+credentials.json
+**/__pycache__/
+node_modules/
+```
+
+### 10.3 敏感信息检测
+
+提交前检查：
+- [ ] 无硬编码 API Key
+- [ ] 无硬编码 Token/Cookie
+- [ ] 无内网 IP/域名
+- [ ] 无真实客户案件数据
+
+---
+
+## 十一、测试要求
+
+### 11.1 最低要求
+
+| 仓库 | 提交前必测 | 测试方式 |
+|:-----|:-----|:-----|
+| mcp-hub | MCP Server 启动 | `python servers/*/scripts/server.py --help` |
+| mcp-hub | 配置生成 | `.\verify.ps1` |
+| CN main | 技能加载 | Codex Desktop 中验证 |
+| CN main | 护栏有效 | `.\benchmark\run-benchmark.ps1` |
+| JDP | Prompt 有效 | 模拟输入测试 |
+| codices | JSON 格式 | `python -m json.tool` 校验 |
+| ALN | 阻断清单完整 | 29 项全部存在 |
+
+### 11.2 不要求
+
+- 不要求覆盖率指标（法律 AI 不适合传统单元测试）
+- 不要求 CI 全绿（部分测试依赖外部 API）
+
+---
+
+## 十二、分支与 PR 规范
+
+### 12.1 分支策略
+
+```
+main ─────●──────────●──────────●──→ 生产就绪
+           \         /
+feature/A ──●──●──●─┘
+```
+
+- **main**：受保护，直接推送仅限维护者
+- **feature/***：功能分支，合并后删除
+- **fix/***：Bug 修复分支
+
+### 12.2 PR 最小 Checklist
+
+```
+[ ] 四平台兼容（Codex / Claude Code / WorkBuddy / Trae）
+[ ] env-check.ps1 通过
+[ ] 无硬编码凭证
+[ ] CHANGELOG 已更新
+[ ] 版本号已更新（如有需要）
+[ ] 相关文档已同步
+```
+
+---
+
+## 十三、文档要求
+
+### 13.1 代码与文档同步
+
+- 任何 API / 配置 / 接口变更，**必须同步更新**对应 `.md` 文档
+- 新增技能必须更新 `ECOSYSTEM.md` 或 `FILE_INDEX.md`
+- 新增 MCP 连接器必须更新 `detect.ps1`
+
+### 13.2 法律引用标准
+
+所有法条引用必须使用可核验格式：
+```
+✅ 《民法典》第 584 条
+✅ 《刑法》第 232 条
+❌ "根据相关法律规定"
+❌ 未标注来源的司法解释
+```
+
+---
+
+## 十四、依赖管理
+
+### 14.1 版本锁定
+
+| 语言 | 锁定文件 | 更新方式 |
+|:-----|:-----|:-----|
+| Python | `requirements.txt`（下限版本） | 手动审查后 bump |
+| PowerShell | `#Requires -Version` 声明 | 同步 env-check 阈值 |
+| Node.js | `package.json`（如有） | 手动审查后 bump |
+
+### 14.2 依赖添加流程
+
+1. 在分支中修改 `requirements.txt`
+2. 同步更新 `env-check.ps1` 中的最低版本要求
+3. 测试 MCP Server 启动
+4. PR 中说明新增依赖的理由
+
+---
+
+> **规则优先级**：安全准则 > 环境校验 > 四平台兼容 > 版本管理 > 提交规范 > 其他
