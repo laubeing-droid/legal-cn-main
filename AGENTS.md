@@ -94,10 +94,10 @@ foreach ($p in $active) {
 
 ### 3.1 codex-claude-legal-cn-main（技能主仓库）
 
-- **所有 150+ 子技能**的 SKILL.md 必须声明 `platforms` 字段
+- **skills/ 目录下全部子技能**的 SKILL.md 必须声明 `platforms` 字段
 - `install.ps1` 必须部署到全部四个平台的技能目录
 - 新增技能时同时生成四平台配置
-- 护栏/阻断规则（29项）四平台通用，但需确认 WorkBuddy 和 Trae 的加载路径
+- 护栏/阻断规则（blocking-list.md 中全部条目，数量会持续增长）四平台通用，但需确认 WorkBuddy 和 Trae 的加载路径
 
 ### 3.2 codex-claude-legal-cn-mcp-hub（MCP 连接器）
 
@@ -348,7 +348,7 @@ node_modules/
 | CN main | 护栏有效 | `.\benchmark\run-benchmark.ps1` |
 | JDP | Prompt 有效 | 模拟输入测试 |
 | codices | JSON 格式 | `python -m json.tool` 校验 |
-| ALN | 阻断清单完整 | 29 项全部存在 |
+| ALN | 阻断清单完整 | blocking-list.md 中全部条目存在 |
 
 ### 11.2 不要求
 
@@ -476,7 +476,7 @@ feature/A ──●──●──●─┘
 | # | 规则 | 检测方式 | 级别 | 自动修复 |
 |:--|:-----|:-----|:--|:--|
 | L1 | 法条引用格式可核验 | 正则 `《.+》第 \d+ 条` 或标准格式 | 🟡 | ✅ 自动 |
-| L2 | 无美式法律概念渗入 | 检测 29 项阻断清单关键词 | 🔴 | ✅ 自动 |
+| L2 | 无美式法律概念渗入 | 检测 blocking-list.md 中全部阻断关键词 | 🔴 | ✅ 自动 |
 | L3 | 引用标注来源 | `[需核验]` `[来源:XXX]` 格式 | 🟡 | ✅ 自动 |
 | L4 | 免责声明完整 | SKILL.md 含 `不构成正式法律意见` | 🔴 | ✅ 自动 |
 
